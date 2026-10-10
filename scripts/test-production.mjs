@@ -19,6 +19,9 @@ const users = [],
   sessions = [],
   errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
+page.on('console', (message) => {
+  if (message.type() === 'error') errors.push(message.text());
+});
 page.on('response', async (r) => {
   if (r.url().includes('identitytoolkit.googleapis.com/v1/accounts:signUp') && r.ok()) {
     const u = await r.json();

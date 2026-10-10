@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import sharp from 'sharp';
+const png = await sharp('public/art/brand-compass.svg').resize(32, 32).png().toBuffer();
+const header = Buffer.from([0, 0, 1, 0, 1, 0]);
+const entry = Buffer.alloc(16);
+entry[0] = 32;
+entry[1] = 32;
+entry.writeUInt16LE(1, 4);
+entry.writeUInt16LE(32, 6);
+entry.writeUInt32LE(png.length, 8);
+entry.writeUInt32LE(22, 12);
+fs.writeFileSync('app/favicon.ico', Buffer.concat([header, entry, png]));
