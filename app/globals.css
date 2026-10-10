@@ -3960,3 +3960,24 @@ img {
     max-width: 320px;
   }
 }
+.region-preparing-note {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  background: #efbd780a;
+  border: 1px solid #efbd782a;
+  border-radius: 7px;
+  color: var(--gold);
+}
+.region-preparing-note h3 {
+  font-size: 13px;
+  letter-spacing: -0.4px;
+  margin-bottom: 7px;
+}
+.region-preparing-note p {
+  font-size: 10px;
+  line-height: 1.9;
+  color: var(--muted);
+}

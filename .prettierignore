@@ -9,3 +9,6 @@ data
 package-lock.json
 functions/package-lock.json
 docs/previews
+firestore.rules
+functions/src/shared
+functions/src/questions.ts

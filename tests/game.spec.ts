@@ -80,7 +80,8 @@ test('unready areas remain explorable and do not start unavailable questions', a
   await page.getByRole('textbox', { name: '지역 검색' }).fill('제천');
   await page.getByRole('button', { name: '제천시', exact: true }).click();
   await expect(page.getByRole('heading', { name: '새로운 지역을 발견했어요!' })).toBeVisible();
-  await expect(page.locator('.quiz-pick')).toHaveCount(0);
+  await expect(page.locator('.quiz-pick')).toHaveCount(16);
+  await expect(page.locator('.quiz-pick:disabled')).toHaveCount(16);
 });
 test('API rejects duplicate picks, answers out of order and double submits', async ({
   request,

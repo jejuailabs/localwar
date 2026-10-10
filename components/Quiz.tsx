@@ -136,120 +136,111 @@ export function RegionChallenge({
             <b>{picks.length}</b> / 4
           </span>
         </div>
-        {region.playable ? (
-          <>
-            <div className="quiz-grid">
-              <div className="grid-corner">분류 / 난이도</div>
-              {LEVELS.map((l) => (
-                <div className="level-label" key={l}>
-                  <span>
-                    {l === 1
-                      ? '가볍게'
-                      : l === 2
-                        ? '흥미롭게'
-                        : l === 3
-                          ? '깊이 있게'
-                          : '전문가처럼'}
-                  </span>
-                  <b>LEVEL {l}</b>
-                </div>
-              ))}
-              {CATEGORIES.map((c) => {
-                const Icon = Icons[c.icon as keyof typeof Icons];
-                return (
-                  <div className="grid-row" key={c.id}>
-                    <div className="category-label" style={{ color: c.color }}>
-                      <Icon size={20} />
-                      <b>{c.label}</b>
-                    </div>
-                    {LEVELS.map((l) => {
-                      const selected = picks.some((p) => p.category === c.id && p.level === l);
-                      const order = picks.findIndex((p) => p.category === c.id && p.level === l);
-                      return (
-                        <button
-                          key={l}
-                          aria-label={`${c.label} ${l}단계 ${BASE_POINTS[l]}점`}
-                          aria-pressed={selected}
-                          disabled={busy || (!selected && picks.length === 4)}
-                          className={`quiz-pick ${selected ? 'picked' : ''}`}
-                          onClick={() => {
-                            setError('');
-                            setPicks(
-                              selected
-                                ? picks.filter((p) => !(p.category === c.id && p.level === l))
-                                : [...picks, { category: c.id, level: l }],
-                            );
-                          }}
-                        >
-                          <span className="pick-order">
-                            {selected ? (
-                              order + 1
-                            ) : (
-                              <span className="difficulty-dots">
-                                {Array.from({ length: l }, (_, i) => (
-                                  <i key={i} />
-                                ))}
-                              </span>
-                            )}
-                          </span>
-                          <strong>{BASE_POINTS[l]}</strong>
-                          <small>POINTS</small>
-                          {selected && <Check size={16} className="pick-check" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-                );
-              })}
+        {!region.playable && (
+          <div className="region-preparing-note">
+            <Compass size={23} />
+            <div>
+              <h3>새로운 지역을 발견했어요!</h3>
+              <p>이 지역의 문항은 준비 중입니다. 준비된 지역에서 먼저 원정을 시작해 보세요.</p>
             </div>
-            <div className="selection-summary">
-              <div>
-                <span>선택한 원정의 기본 점수</span>
-                <b>
-                  {max.toLocaleString()} <small>PTS</small>
-                </b>
+          </div>
+        )}
+        <>
+          <div className="quiz-grid">
+            <div className="grid-corner">분류 / 난이도</div>
+            {LEVELS.map((l) => (
+              <div className="level-label" key={l}>
+                <span>
+                  {l === 1 ? '가볍게' : l === 2 ? '흥미롭게' : l === 3 ? '깊이 있게' : '전문가처럼'}
+                </span>
+                <b>LEVEL {l}</b>
               </div>
-              <span>
-                최대 <b>{Math.round(max * 1.2).toLocaleString()}점</b>에 도전
-              </span>
+            ))}
+            {CATEGORIES.map((c) => {
+              const Icon = Icons[c.icon as keyof typeof Icons];
+              return (
+                <div className="grid-row" key={c.id}>
+                  <div className="category-label" style={{ color: c.color }}>
+                    <Icon size={20} />
+                    <b>{c.label}</b>
+                  </div>
+                  {LEVELS.map((l) => {
+                    const selected = picks.some((p) => p.category === c.id && p.level === l);
+                    const order = picks.findIndex((p) => p.category === c.id && p.level === l);
+                    return (
+                      <button
+                        key={l}
+                        aria-label={`${c.label} ${l}단계 ${BASE_POINTS[l]}점`}
+                        aria-pressed={selected}
+                        disabled={!region.playable || busy || (!selected && picks.length === 4)}
+                        className={`quiz-pick ${selected ? 'picked' : ''}`}
+                        onClick={() => {
+                          setError('');
+                          setPicks(
+                            selected
+                              ? picks.filter((p) => !(p.category === c.id && p.level === l))
+                              : [...picks, { category: c.id, level: l }],
+                          );
+                        }}
+                      >
+                        <span className="pick-order">
+                          {selected ? (
+                            order + 1
+                          ) : (
+                            <span className="difficulty-dots">
+                              {Array.from({ length: l }, (_, i) => (
+                                <i key={i} />
+                              ))}
+                            </span>
+                          )}
+                        </span>
+                        <strong>{BASE_POINTS[l]}</strong>
+                        <small>{region.playable ? 'POINTS' : '준비 중'}</small>
+                        {selected && <Check size={16} className="pick-check" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+          <div className="selection-summary">
+            <div>
+              <span>선택한 원정의 기본 점수</span>
+              <b>
+                {max.toLocaleString()} <small>PTS</small>
+              </b>
             </div>
-            {error && (
-              <p className="error-message" role="alert">
-                {error}
-              </p>
-            )}
-            <button
-              className="primary-button challenge-start"
-              disabled={picks.length !== 4 || busy}
-              onClick={start}
-            >
-              <Swords size={18} />
-              {busy
+            <span>
+              최대 <b>{Math.round(max * 1.2).toLocaleString()}점</b>에 도전
+            </span>
+          </div>
+          {error && (
+            <p className="error-message" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            className="primary-button challenge-start"
+            disabled={!region.playable || picks.length !== 4 || busy}
+            onClick={start}
+          >
+            <Swords size={18} />
+            {!region.playable
+              ? '퀴즈 문항을 준비하고 있어요'
+              : busy
                 ? '원정 준비 중…'
                 : picks.length === 4
                   ? '4문제 원정 시작'
                   : `도전할 퀴즈를 ${4 - picks.length}개 더 골라주세요`}
-              <ArrowRight size={18} />
-            </button>
-            <p className="selection-note">
-              같은 난이도도 자유롭게 선택할 수 있어요. 선택 순서대로 출제됩니다.
-            </p>
-          </>
-        ) : (
-          <div className="coming-soon">
-            <Compass size={46} />
-            <h3>새로운 지역을 발견했어요!</h3>
-            <p>
-              이 지역의 퀴즈는 준비 중입니다.
-              <br />
-              지금은 서귀포시·충주시·종로구에서 도전할 수 있어요.
-            </p>
-            <button className="primary-button" onClick={onClose}>
-              다음 지역 탐험하기
-              <ArrowRight size={17} />
-            </button>
-          </div>
-        )}
+            <ArrowRight size={18} />
+          </button>
+          <p className="selection-note">
+            {region.playable
+              ? '같은 난이도도 자유롭게 선택할 수 있어요. 선택 순서대로 출제됩니다.'
+              : '지금은 서귀포시·충주시·종로구에서 퀴즈에 도전할 수 있어요.'}
+          </p>
+        </>
       </section>
     </div>
   );
