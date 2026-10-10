@@ -1,0 +1,121 @@
+# 로컬 퀴즈대전 (Local Quiz Battle)
+
+> 대한민국 지역 상식 기반 실시간 퀴즈 점령 게임
+> "지식을 무기로, 지역을 점령하라!"
+
+대한민국 전체가 하나의 게임판입니다. 사용자는 전국 각 지역의 역사·문화, 인물·대중문화, 특산물·음식, 관광·지역상식 퀴즈를 풀고, 획득한 점수로 다른 지역을 점령하거나 자기 지역을 방어합니다. 결과는 실시간으로 전국 지도에 반영됩니다.
+
+---
+
+## 현재 실행 가능한 첫 버전
+
+- 전국 시·도에 롤오버하면 땅이 입체적으로 떠오르고 해당 도의 시·군·구 지도가 펼쳐집니다.
+- 시·군·구 롤오버에는 부상·윤곽 강조·원정 카드가 적용되며 클릭하면 지역 화면으로 이동합니다.
+- 서귀포시(성산 일대)·충주시·종로구에서 분류×난이도 16칸 중 4칸을 골라 총 48개 문항을 플레이할 수 있습니다.
+- 문제당 30초, 빠른 정답 최대 1.2배, 연속 정답 콤보, 점령 게이지, 탐험 도감·배지·원정 기록을 제공합니다.
+- 게스트 즉시 플레이와 Google 로그인, Firebase 서버 채점·기록 저장·실시간 프로필 동기화를 연결했습니다.
+- 현재 점령 게이지는 개인 프리시즌 진행도입니다. 팀 간 실시간 점령전·시즌·어드민·다국어는 다음 단계입니다.
+
+실제 구현 및 배포 구조는 [구현 상태](docs/11-implementation.md), 그림·지도 출처는 [자산 문서](docs/10-assets-and-map-sources.md)를 참고하세요.
+
+## 1. 핵심 요구사항 요약
+
+| 항목 | 결정 사항 |
+|---|---|
+| 프론트엔드 / 호스팅 | Next.js (App Router, TypeScript) + **Vercel** |
+| 인증 | **Firebase Auth – Google 로그인** (MVP), 기타 소셜은 2차 |
+| 데이터베이스 | **Cloud Firestore** |
+| 서버 로직 | **Cloud Functions for Firebase** (점수 검증, 점령 집계, 시즌 리셋) |
+| 테마 | **다크/라이트 모드 토글 스위치** (시스템 설정 연동 + 사용자 선택 저장) |
+| 다국어 | **ko(기본) / en / ja / zh-CN** – UI 문자열 + 퀴즈 콘텐츠 번역 필드 |
+| 관리자 | **어드민 모드** – 대시보드, 회원관리, 문제은행 검수, 시즌·지역·신고·감사 로그 |
+| 지도 | 대한민국 행정구역 GeoJSON → SVG 렌더링 (d3-geo) |
+| UI 시안 | B안(배틀형) 플레이 화면 + D안(전략형) 정보 패널 결합 권장 |
+
+---
+
+## 2. 문서 목록 (`/docs`)
+
+| # | 문서 | 내용 |
+|---|---|---|
+| 01 | [제품 개요 및 게임 규칙](docs/01-product-overview.md) | 콘셉트, 게임 흐름, 4×4 퀴즈, 점령·시즌 규칙, 미확정 규칙 |
+| 02 | [시스템 아키텍처](docs/02-architecture.md) | 전체 구성도, 폴더 구조, 데이터 흐름, 실시간 전략 |
+| 03 | [데이터 모델 및 보안 규칙](docs/03-data-model.md) | Firestore 컬렉션 스키마, 인덱스, Security Rules |
+| 04 | [인증 및 권한](docs/04-auth-and-roles.md) | Google 로그인, 세션, 역할(Custom Claims), 미성년자 처리 |
+| 05 | [게임 로직 및 점수 계산](docs/05-game-logic.md) | 출제·채점·시간계수·점령력·부정행위 방지 Functions |
+| 06 | [UI/UX 및 테마](docs/06-ui-ux-and-theme.md) | 화면 구성, 시안 분석, 다크/라이트 토글, 지도 인터랙션 |
+| 07 | [다국어(i18n)](docs/07-i18n.md) | 로케일 라우팅, 메시지 관리, 퀴즈 콘텐츠 번역 정책 |
+| 08 | [어드민 콘솔](docs/08-admin-console.md) | 대시보드 KPI, 회원관리, 문제은행 워크플로, 운영 도구 |
+| 09 | [배포·운영·로드맵](docs/09-deployment-and-ops.md) | Vercel/Firebase 배포, 환경변수, 비용, 모니터링, 단계별 일정 |
+
+---
+
+## 3. 빠른 시작
+
+Node.js 22 이상을 사용합니다. 프론트엔드 패키지는 npm lockfile로 고정했습니다.
+
+```bash
+npm ci
+# .env.example을 .env.local로 복사
+npm run dev
+# http://127.0.0.1:3000
+```
+
+`NEXT_PUBLIC_GAME_BACKEND=demo`이면 로그인 없이 로컬 서버가 시연을 채점합니다. `firebase`이면 설정한 프로젝트의 게스트/Google 인증과 Cloud Functions를 사용합니다. Firebase 웹 설정은 공개 설정이며 비공개 서비스 계정 키는 필요하지 않습니다.
+
+```bash
+npm test
+npm run typecheck
+npm run build
+npm run test:e2e
+
+npm --prefix functions ci
+npm --prefix functions run build
+npm --prefix functions test
+firebase deploy --only functions:localwar,firestore:rules --project test-e27db
+```
+
+브라우저 테스트에 Playwright Chromium이 없다면 `npx playwright install chromium`을 실행하세요. 다른 브라우저 바이너리는 `PLAYWRIGHT_CHROMIUM_PATH`로 지정할 수 있습니다.
+
+---
+
+## 4. 당초 기획 구조 (확장 계획)
+
+```
+local-quiz-battle/
+├─ README.md
+├─ docs/                 # 설계 문서 (본 폴더)
+├─ apps/web/             # Next.js 앱 (Vercel 배포)
+├─ functions/            # Cloud Functions (Firebase 배포)
+├─ packages/shared/      # 공통 타입·점수 계산 로직·지역 코드
+├─ firestore.rules
+├─ firestore.indexes.json
+└─ firebase.json
+```
+
+상세 구조는 [docs/02-architecture.md](docs/02-architecture.md)를 참고하세요.
+
+---
+
+## 5. 구현 전 반드시 확정할 사항
+
+기획서 10장의 4가지 미확정 규칙과, 시안 검토 중 발견한 불일치 사항입니다. 상세 내용은 [docs/01](docs/01-product-overview.md#7-미확정-규칙-및-확인-필요-사항)에 정리했습니다.
+
+1. **지역 소속 기준** – 거주지 / 출신지, 변경 제한
+2. **점령 판정** – 최소 참여 인원, 점수 격차, 유지 시간
+3. **반복 도전 제한** – 일일 반영 횟수, 재출제 간격
+4. **시즌 종료 보상** – 보상 방식, 누적 기록 반영
+5. **시간계수 불일치** – 기획서는 최대 1.2배, 시안은 100점 문제에 +30(1.3배) 표시
+6. **누적 점수 분모 불일치** – 시안 "130 / 400점" vs 기획서 "선택한 4문제 최대 750점"
+7. **만 14세 미만 이용자 처리** – 문제 난이도가 초등 수준이므로 아동 가입 가능성 고려 필요
+
+---
+
+## 6. 개발 단계
+
+| 단계 | 범위 |
+|---|---|
+| **1단계 MVP** | 전국 지도, 지역 선택, 16칸 선택, 4문제 풀이, 서버 채점, 지역 랭킹, Google 로그인, 테마, ko/en, 기본 어드민 (제주·충북 실데이터) |
+| **2단계** | 공격·방어, 실시간 점령, 주간 시즌, 세대·성별 지도, 격전지, 방어 알림, ja/zh-CN |
+| **3단계** | 전국 동시 OX, 지역 대항전·동맹, 축제 특별전, 지자체 협업·리워드 |
+

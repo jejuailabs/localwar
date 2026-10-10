@@ -1,0 +1,37 @@
+{
+  "name": "local-quiz-battle",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "d3-geo": "3.1.1",
+    "firebase": "12.18.0",
+    "lucide-react": "^0.468.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "prettier": "3.9.10",
+    "tsx": "^4.20.0",
+    "typescript": "7.0.2"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "1.14.6",
+    "@firebase/app": "0.16.2",
+    "@firebase/app-compat": "0.5.18"
+  }
+}

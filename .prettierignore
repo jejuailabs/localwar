@@ -1,0 +1,11 @@
+node_modules
+.next
+.vercel
+functions/lib
+functions/node_modules
+public/geo
+public/art
+data
+package-lock.json
+functions/package-lock.json
+docs/previews

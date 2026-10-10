@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.env.local
+.env.*.local
+test-results/
+playwright-report/
+*.log
+.firebase/
+*.tsbuildinfo
+.vercel/
+functions/lib/
+functions/node_modules/
+data/firebase-existing.rules
+firebase-debug.log
+firestore-debug.log
+.vercel
+next-env.d.ts
