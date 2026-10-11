@@ -519,7 +519,7 @@ img {
 .map-viewport {
   position: relative;
   flex: 1;
-  min-height: 554px;
+  min-height: 620px;
   overflow: hidden;
   background: radial-gradient(ellipse at 57% 39%, #1c3435 0%, #142630 42%, #111f2b 80%);
 }
@@ -3726,8 +3726,12 @@ img {
   font-size: 10px;
   color: var(--muted);
 }
-.county-board {
+.county-entry {
   animation: regionRise 0.85s cubic-bezier(0.17, 0.8, 0.2, 1) both;
+  transform-origin: 380px 310px;
+}
+.county-board {
+  transition: transform 0.3s;
   filter: url(#island-shadow);
   transform-origin: 0 0;
 }
@@ -4324,4 +4328,94 @@ img {
   .battle-summary button {
     width: 100%;
   }
+}
+
+/* Keep map controls above map annotations and expose the actual zoom. */
+.map-controls {
+  z-index: 5;
+}
+.map-zoom-level {
+  text-align: center;
+  font-size: 9px;
+  color: var(--muted);
+  padding: 4px 0;
+  min-width: 34px;
+}
+.korea-map.can-pan {
+  cursor: grab;
+  touch-action: none;
+}
+.korea-map.can-pan:active {
+  cursor: grabbing;
+}
+.map-hint,
+.ocean-label,
+.map-legend,
+.province-lift-label {
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .map-viewport {
+    min-height: 550px;
+  }
+  .korea-map {
+    width: 116%;
+    height: 100%;
+    left: -8%;
+    top: 0;
+  }
+}
+
+.map-hint {
+  max-width: 270px;
+}
+@media (max-width: 600px) {
+  .map-hint {
+    top: 16px;
+    bottom: auto;
+    max-width: 155px;
+    align-items: flex-start;
+  }
+}
+.region-photo-pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  color: #8db7ab;
+  background: radial-gradient(ellipse at center, #34564b, #142633);
+}
+.region-photo-pending span {
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+
+.regional-photo-credit {
+  display: block;
+  padding: 10px 20px 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.7;
+}
+.featured-photo-credit {
+  position: absolute;
+  background: #132733c9;
+  padding: 4px 6px;
+  border-radius: 3px;
+  max-width: calc(100% - 36px);
+  width: fit-content;
+  top: 51px;
+  left: 18px;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #eef4ed;
+  text-shadow: 0 1px 3px #000;
+  z-index: 1;
+}
+.regional-photo-credit:hover,
+.featured-photo-credit:hover {
+  text-decoration: underline;
 }

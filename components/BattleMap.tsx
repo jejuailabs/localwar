@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { geoMercator, geoPath } from 'd3-geo';
 import type { FeatureCollection, Geometry } from 'geojson';
 import {
@@ -43,6 +43,22 @@ export default function BattleMap({
     [search, setSearch] = useState(''),
     [mapError, setMapError] = useState(false),
     [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const drag = useRef<{ x: number; y: number; panX: number; panY: number; moved: boolean } | null>(
+    null,
+  );
+  const suppressClick = useRef(false);
+  function fitMap() {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }
+  function changeZoom(delta: number) {
+    const next = Math.max(0.8, Math.min(2, Math.round((zoom + delta) * 10) / 10));
+    setZoom(next);
+    if (next <= 1) setPan({ x: 0, y: 0 });
+    setActive((value) => (focus ? value : null));
+    setHoverCounty(null);
+  }
   useEffect(() => {
     Promise.all([
       fetch('/geo/korea.geojson').then((r) => {
@@ -68,8 +84,8 @@ export default function BattleMap({
       data
         ? geoMercator().fitExtent(
             [
-              [180, 43],
-              [644, 577],
+              [70, 45],
+              [690, 605],
             ],
             data,
           )
@@ -103,7 +119,7 @@ export default function BattleMap({
     setActive(p);
     setHoverCounty(null);
     setFocus(p.iso);
-    setZoom(1);
+    fitMap();
   }
   function lift(iso: string) {
     if (focus || list) return;
@@ -119,12 +135,12 @@ export default function BattleMap({
     setFocus(null);
     setActive(null);
     setHoverCounty(null);
-    setZoom(1);
+    fitMap();
   }
   function countyRegion(c: CountyProperties) {
     return active?.regions.find((r) => r.name === c.name);
   }
-  const nationalTransform = `translate(${420 * (1 - zoom)},${310 * (1 - zoom)}) scale(${zoom})`;
+  const nationalTransform = `translate(${380 * (1 - zoom) + pan.x}px,${325 * (1 - zoom) + pan.y}px) scale(${zoom})`;
   return (
     <section className="map-card" aria-label="대한민국 탐험 지도">
       <div className="map-toolbar">
@@ -153,8 +169,39 @@ export default function BattleMap({
         <span className="ocean-label west">YELLOW SEA</span>
         {!list && projection && path ? (
           <svg
-            className="korea-map"
+            className={`korea-map ${zoom > 1 ? 'can-pan' : ''}`}
             viewBox="0 0 760 650"
+            onPointerDown={(e) => {
+              suppressClick.current = false;
+              if (zoom <= 1 || !e.isPrimary || e.button !== 0) return;
+              drag.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y, moved: false };
+            }}
+            onPointerMove={(e) => {
+              const start = drag.current;
+              if (!start) return;
+              const dx = e.clientX - start.x,
+                dy = e.clientY - start.y;
+              if (!start.moved && Math.hypot(dx, dy) < 6) return;
+              start.moved = true;
+              suppressClick.current = true;
+              e.currentTarget.setPointerCapture(e.pointerId);
+              const scale = e.currentTarget.getScreenCTM()?.a || 1;
+              setPan({ x: start.panX + dx / scale, y: start.panY + dy / scale });
+              if (!focus) setActive(null);
+              setHoverCounty(null);
+            }}
+            onPointerUp={() => {
+              drag.current = null;
+            }}
+            onPointerCancel={() => {
+              drag.current = null;
+            }}
+            onClickCapture={(e) => {
+              if (!suppressClick.current) return;
+              e.preventDefault();
+              e.stopPropagation();
+              suppressClick.current = false;
+            }}
             aria-label="도에 마우스를 올려 확인하고 클릭해 시·군·구 지도를 펼쳐보세요"
           >
             <defs>
@@ -306,92 +353,93 @@ export default function BattleMap({
                 })}
             </g>
             {focus && countyPath && countyProjection && (
-              <g
-                key={focus}
-                className="county-board"
-                style={{
-                  transform: `translate(${420 * (1 - zoom)},${300 * (1 - zoom) - 12}) scale(${zoom})`,
-                }}
-              >
-                {counties.map((f, i) => {
-                  const r = countyRegion(f.properties);
-                  if (!r) return null;
-                  const hovered = r.code === hoverCounty?.code;
-                  const d = countyPath(f) || '';
-                  const center = countyPath.centroid(f);
-                  const area = countyPath.area(f);
-                  return (
-                    <g
-                      key={f.properties.id}
-                      className={`county-island ${hovered ? 'county-hovered' : ''} ${r.playable ? 'county-playable' : ''}`}
-                    >
-                      <g className="county-terrain" pointerEvents="none">
-                        {[13, 10, 7, 4].map((depth) => (
+              <g key={focus} className="county-entry">
+                <g
+                  className="county-board"
+                  style={{
+                    transform: `translate(${380 * (1 - zoom) + pan.x}px,${310 * (1 - zoom) - 12 + pan.y}px) scale(${zoom})`,
+                  }}
+                >
+                  {counties.map((f, i) => {
+                    const r = countyRegion(f.properties);
+                    if (!r) return null;
+                    const hovered = r.code === hoverCounty?.code;
+                    const d = countyPath(f) || '';
+                    const center = countyPath.centroid(f);
+                    const area = countyPath.area(f);
+                    return (
+                      <g
+                        key={f.properties.id}
+                        className={`county-island ${hovered ? 'county-hovered' : ''} ${r.playable ? 'county-playable' : ''}`}
+                      >
+                        <g className="county-terrain" pointerEvents="none">
+                          {[13, 10, 7, 4].map((depth) => (
+                            <path
+                              key={depth}
+                              d={d}
+                              transform={`translate(0,${depth})`}
+                              fill={hovered ? '#95612b' : '#2b4845'}
+                              stroke={hovered ? '#c2924a' : '#466259'}
+                              strokeWidth=".55"
+                            />
+                          ))}
                           <path
-                            key={depth}
                             d={d}
-                            transform={`translate(0,${depth})`}
-                            fill={hovered ? '#95612b' : '#2b4845'}
-                            stroke={hovered ? '#c2924a' : '#466259'}
-                            strokeWidth=".55"
+                            className="county-face"
+                            fill={
+                              hovered
+                                ? 'url(#county-active)'
+                                : r.playable
+                                  ? '#6b9e83'
+                                  : ['#456c62', '#527a68', '#4e7267', '#5b7d69', '#497568'][i % 5]
+                            }
+                            stroke={hovered ? '#ffe8b5' : '#9cbfac'}
+                            strokeWidth={hovered ? 2.4 : 1.25}
                           />
-                        ))}
+                          {(area > 750 || hovered) && (
+                            <text
+                              x={center[0]}
+                              y={center[1]}
+                              className={`county-name ${hovered ? 'county-name-active' : ''}`}
+                            >
+                              {r.name}
+                            </text>
+                          )}
+                          {r.playable && (
+                            <g transform={`translate(${center[0]},${center[1] - 19})`}>
+                              <circle r="11" fill="#0b1e26" stroke="#edbd78" strokeWidth="1.2" />
+                              <path
+                                d="M-3 5V-5L4-3L-3 0"
+                                fill="#efbd78"
+                                stroke="#efbd78"
+                                strokeWidth="1.4"
+                              />
+                            </g>
+                          )}
+                        </g>
                         <path
                           d={d}
-                          className="county-face"
-                          fill={
-                            hovered
-                              ? 'url(#county-active)'
-                              : r.playable
-                                ? '#6b9e83'
-                                : ['#456c62', '#527a68', '#4e7267', '#5b7d69', '#497568'][i % 5]
-                          }
-                          stroke={hovered ? '#ffe8b5' : '#9cbfac'}
-                          strokeWidth={hovered ? 2.4 : 1.25}
+                          className="county-hit"
+                          fill="transparent"
+                          stroke="transparent"
+                          strokeWidth="2"
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`${r.name} ${r.playable ? '퀴즈 선택' : '탐험'}`}
+                          onMouseEnter={() => setHoverCounty(r)}
+                          onFocus={() => setHoverCounty(r)}
+                          onClick={() => onRegion(r)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              onRegion(r);
+                            }
+                          }}
                         />
-                        {(area > 750 || hovered) && (
-                          <text
-                            x={center[0]}
-                            y={center[1]}
-                            className={`county-name ${hovered ? 'county-name-active' : ''}`}
-                          >
-                            {r.name}
-                          </text>
-                        )}
-                        {r.playable && (
-                          <g transform={`translate(${center[0]},${center[1] - 19})`}>
-                            <circle r="11" fill="#0b1e26" stroke="#edbd78" strokeWidth="1.2" />
-                            <path
-                              d="M-3 5V-5L4-3L-3 0"
-                              fill="#efbd78"
-                              stroke="#efbd78"
-                              strokeWidth="1.4"
-                            />
-                          </g>
-                        )}
                       </g>
-                      <path
-                        d={d}
-                        className="county-hit"
-                        fill="transparent"
-                        stroke="transparent"
-                        strokeWidth="2"
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`${r.name} ${r.playable ? '퀴즈 선택' : '탐험'}`}
-                        onMouseEnter={() => setHoverCounty(r)}
-                        onFocus={() => setHoverCounty(r)}
-                        onClick={() => onRegion(r)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            onRegion(r);
-                          }
-                        }}
-                      />
-                    </g>
-                  );
-                })}
+                    );
+                  })}
+                </g>
               </g>
             )}
             {!focus && (
@@ -514,18 +562,29 @@ export default function BattleMap({
             <button
               className="icon-button"
               aria-label="지도 확대"
-              disabled={zoom >= 1.6}
-              onClick={() => setZoom((v) => Math.min(1.6, v + 0.2))}
+              disabled={zoom >= 2}
+              onClick={() => changeZoom(0.2)}
             >
               <Plus size={17} />
             </button>
             <button
               className="icon-button"
               aria-label="지도 축소"
-              disabled={zoom <= 1}
-              onClick={() => setZoom((v) => Math.max(1, v - 0.2))}
+              disabled={zoom <= 0.8}
+              onClick={() => changeZoom(-0.2)}
             >
               <Minus size={17} />
+            </button>
+            <output className="map-zoom-level" aria-label="지도 배율" aria-live="polite">
+              {Math.round(zoom * 100)}%
+            </output>
+            <button
+              className="icon-button"
+              aria-label="지도 전체 보기"
+              title="지도 전체 보기"
+              onClick={fitMap}
+            >
+              <Compass size={17} />
             </button>
           </div>
         )}

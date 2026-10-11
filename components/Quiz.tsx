@@ -58,6 +58,7 @@ export function RegionChallenge({
       .then(setBattle)
       .catch(() => {});
   }, []);
+  const art = REGION_ART[region.code];
   const max = picks.reduce((sum, p) => sum + BASE_POINTS[p.level], 0);
   async function start() {
     setBusy(true);
@@ -74,10 +75,14 @@ export function RegionChallenge({
     <div className="challenge-layout">
       <div className="challenge-intro">
         <div className="challenge-art">
-          <img
-            src={(REGION_ART[region.code] || REGION_ART['jeju-seogwipo']).src}
-            alt={(REGION_ART[region.code] || REGION_ART['jeju-seogwipo']).alt}
-          />
+          {art ? (
+            <img src={art.src} alt={art.alt} style={{ objectPosition: art.position || 'center' }} />
+          ) : (
+            <div className="region-photo-pending" aria-label={`${region.name} 지역 사진 준비 중`}>
+              <MapPin size={88} />
+              <span>{region.name}</span>
+            </div>
+          )}
           <div className="art-vignette" />
           <span className="image-label">
             <Compass size={14} />
@@ -93,6 +98,16 @@ export function RegionChallenge({
             </h2>
           </div>
         </div>
+        {art?.source && (
+          <a
+            className="regional-photo-credit"
+            href={art.source}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            사진: {art.credit} · 공공누리 제1유형 ↗
+          </a>
+        )}
         <p className="region-description">{region.description}</p>
         <div className="territory-preview">
           <div>

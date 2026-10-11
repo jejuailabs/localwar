@@ -1,4 +1,6 @@
-# 생성 이미지와 출처
+# 이미지와 지도 출처
+
+현재 서비스 배너는 공식 기관의 실제 지역 사진을 사용합니다. 파일·사진별 출처·공공누리 조건은 [14-official-photo-sources.md](14-official-photo-sources.md)를 참고하세요. 아래 생성 이미지 기록은 초기 제작 자료이며 현재 배너에는 사용하지 않습니다.
 
 제작 도구: 내장 image_gen. 아래 이미지는 직접 생성한 게임 콘셉트 일러스트이며 실제 지형을 묘사하는 지도 자료가 아닙니다. 원본 PNG와 웹용 WebP를 public/art에 함께 보관합니다.
 
@@ -36,4 +38,3 @@ Use case: stylized-concept. Asset type: regional expedition card artwork for a K
 - 원자료 메타데이터: data/geo-source.json, data/county-source.json.
 - d3의 구면 좌표 방향에 맞춰 링 방향을 정규화했으며, 도별 소속과 한글명을 별도로 매핑했습니다.
 - 이 스냅샷의 시·군·구 경계는 228개입니다. 최근 행정구역 개편과 누락 경계를 포함한 최신 공식 자료 교체는 전국 서비스 확장 단계에서 진행해야 합니다.
-

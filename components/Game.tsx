@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import DailyQuiz, { BattleSummary } from './DailyQuiz';
 import BattleMap from './BattleMap';
+import { REGION_ART } from '@/lib/art';
 import { ExpeditionResult, QuizPlay, RegionChallenge } from './Quiz';
 import { PLAYABLE_REGIONS, REGIONS, regionByCode, type Region } from '@/lib/regions';
 import {
@@ -350,10 +351,19 @@ export default function Game() {
                 <aside className="dashboard-side">
                   <section className="featured-expedition">
                     <img
-                      src="/art/korea-expedition.webp"
-                      alt="화산섬과 호수, 한옥마을이 어우러진 한국 탐험 풍경"
+                      src={REGION_ART['jeju-seogwipo'].src}
+                      alt={REGION_ART['jeju-seogwipo'].alt}
+                      style={{ objectPosition: REGION_ART['jeju-seogwipo'].position || 'center' }}
                     />
                     <div className="featured-overlay" />
+                    <a
+                      className="featured-photo-credit"
+                      href={REGION_ART['jeju-seogwipo'].source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      사진: {REGION_ART['jeju-seogwipo'].credit} · 공공누리 1 ↗
+                    </a>
                     <span className="featured-tag">
                       <Sparkles size={13} />
                       추천 첫 원정
