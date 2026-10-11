@@ -40,6 +40,36 @@ try {
   assert.ok((await page.locator('.mode-badge').textContent()).includes('온라인'));
   await page.waitForTimeout(500);
   await page.screenshot({ path: 'docs/previews/production-home.png', fullPage: true });
+  assert.equal(await page.locator('.province-island.lifted').count(), 0);
+  assert.ok(
+    await page
+      .locator('.province-side')
+      .evaluateAll((sides) => sides.every((side) => getComputedStyle(side).opacity === '0')),
+  );
+  const sejong = page.getByRole('button', { name: '세종특별자치시 시군 지도 펼치기', exact: true });
+  const target = await sejong.evaluate((path) => {
+    const box = path.getBBox(),
+      matrix = path.getScreenCTM();
+    for (let y = 0.1; y < 1; y += 0.1) {
+      for (let x = 0.1; x < 1; x += 0.1) {
+        const point = new DOMPoint(box.x + box.width * x, box.y + box.height * y);
+        const screen = point.matrixTransform(matrix);
+        if (path.isPointInFill(point) && document.elementFromPoint(screen.x, screen.y) === path)
+          return { x: screen.x, y: screen.y };
+      }
+    }
+    throw new Error('Sejong has no selectable interior');
+  });
+  await page.mouse.move(target.x, target.y);
+  await page.waitForTimeout(1000);
+  assert.equal(await page.locator('.province-lift-label strong').textContent(), '세종특별자치시');
+  assert.equal(await page.locator('.province-island.lifted').count(), 1);
+  assert.equal(await page.locator('.county-hit').count(), 0);
+  await page.screenshot({ path: 'docs/previews/sejong-hover.png', fullPage: true });
+  await page.mouse.click(target.x, target.y);
+  await page.locator('.county-hit').first().waitFor();
+  assert.equal(await page.locator('.county-hit').count(), 1);
+  await page.getByRole('button', { name: '전국으로', exact: true }).click();
   await page.getByRole('button', { name: '서귀포시 탐험하기', exact: true }).click();
   for (const category of ['역사·문화', '인물·이야기', '특산물·음식', '관광·지역상식'])
     await page.getByRole('button', { name: `${category} 1단계 100점`, exact: true }).click();
@@ -78,6 +108,7 @@ try {
       production: 'passed',
       url: 'https://localwar.vercel.app',
       firebaseGuest: true,
+      map: 'flat initial, hover only lifts, Sejong click opens counties',
       questionSource: 'Cloud Functions',
       expedition: '4/4 correct',
       recordAfterReload: true,

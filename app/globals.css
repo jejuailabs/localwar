@@ -3690,6 +3690,11 @@ img {
   transform: translateY(-34px);
   filter: url(#island-shadow);
 }
+.province-side {
+  transition:
+    transform 0.42s cubic-bezier(0.17, 0.8, 0.25, 1),
+    opacity 0.3s;
+}
 .province-top {
   transition:
     fill-opacity 0.3s,

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { geoMercator, geoPath } from 'd3-geo';
 import type { FeatureCollection, Geometry } from 'geojson';
 import {
@@ -40,7 +40,6 @@ export default function BattleMap({
     [search, setSearch] = useState(''),
     [mapError, setMapError] = useState(false),
     [zoom, setZoom] = useState(1);
-  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     Promise.all([
       fetch('/geo/korea.geojson').then((r) => {
@@ -60,9 +59,6 @@ export default function BattleMap({
         setMapError(true);
         setList(true);
       });
-    return () => {
-      if (hoverTimer.current) clearTimeout(hoverTimer.current);
-    };
   }, []);
   const projection = useMemo(
     () =>
@@ -101,7 +97,6 @@ export default function BattleMap({
   );
   const features = data?.features || [];
   function enter(p: Province) {
-    if (hoverTimer.current) clearTimeout(hoverTimer.current);
     setActive(p);
     setHoverCounty(null);
     setFocus(p.iso);
@@ -112,11 +107,12 @@ export default function BattleMap({
     const p = PROVINCES.find((p) => p.iso === iso);
     if (!p) return;
     setActive(p);
-    if (hoverTimer.current) clearTimeout(hoverTimer.current);
-    hoverTimer.current = setTimeout(() => enter(p), 420);
+  }
+  function lower(iso: string) {
+    if (focus) return;
+    setActive((current) => (current?.iso === iso ? null : current));
   }
   function reset() {
-    if (hoverTimer.current) clearTimeout(hoverTimer.current);
     setFocus(null);
     setActive(null);
     setHoverCounty(null);
@@ -141,7 +137,6 @@ export default function BattleMap({
         <button
           className={`small-button ${list ? 'selected' : ''}`}
           onClick={() => {
-            if (hoverTimer.current) clearTimeout(hoverTimer.current);
             setList(!list);
           }}
         >
@@ -157,7 +152,7 @@ export default function BattleMap({
           <svg
             className="korea-map"
             viewBox="0 0 760 650"
-            aria-label="도에 마우스를 올려 시·군·구 지도를 펼쳐보세요"
+            aria-label="도에 마우스를 올려 확인하고 클릭해 시·군·구 지도를 펼쳐보세요"
           >
             <defs>
               <filter id="island-shadow" x="-80%" y="-80%" width="260%" height="260%">
@@ -200,61 +195,83 @@ export default function BattleMap({
               className={`national-board ${focus ? 'receded' : ''}`}
               style={{ transform: nationalTransform }}
             >
+              {[...features]
+                .sort(
+                  (a, b) =>
+                    Number(a.properties.shapeISO === active?.iso) -
+                    Number(b.properties.shapeISO === active?.iso),
+                )
+                .map((f) => {
+                  const p = PROVINCES.find((p) => p.iso === f.properties.shapeISO);
+                  if (!p) return null;
+                  const lifted = active?.iso === p.iso && !focus;
+                  const d = path(f) || '';
+                  const centroid = path.centroid(f);
+                  return (
+                    <g key={p.iso} className={`province-island ${lifted ? 'lifted' : ''}`}>
+                      <g className="province-terrain" pointerEvents="none">
+                        {[12, 9, 6, 3].map((depth) => (
+                          <path
+                            key={depth}
+                            d={d}
+                            className="province-side"
+                            style={{
+                              transform: `translateY(${lifted ? depth : 0}px)`,
+                              opacity: lifted ? 1 : 0,
+                            }}
+                            fill="#283f3b"
+                            stroke="#142b31"
+                            strokeWidth="1"
+                          />
+                        ))}
+                        <path
+                          d={d}
+                          fill={p.color}
+                          fillOpacity={lifted ? 1 : 0.76}
+                          stroke={lifted ? '#ffe6a8' : '#b5cabe77'}
+                          strokeWidth={lifted ? 2 : 1}
+                          className="province-top"
+                        />
+                        {(!['KR-11', 'KR-28', 'KR-30', 'KR-50', 'KR-29', 'KR-27', 'KR-31'].includes(
+                          p.iso,
+                        ) ||
+                          (p.iso === 'KR-50' && lifted)) && (
+                          <text x={centroid[0]} y={centroid[1]} className="province-label">
+                            {p.short}
+                          </text>
+                        )}
+                      </g>
+                    </g>
+                  );
+                })}
               {features.map((f) => {
                 const p = PROVINCES.find((p) => p.iso === f.properties.shapeISO);
                 if (!p) return null;
-                const lifted = active?.iso === p.iso && !focus;
                 const d = path(f) || '';
-                const centroid = path.centroid(f);
                 return (
-                  <g key={p.iso} className={`province-island ${lifted ? 'lifted' : ''}`}>
-                    <g className="province-terrain" pointerEvents="none">
-                      {[12, 9, 6, 3].map((depth) => (
-                        <path
-                          key={depth}
-                          d={d}
-                          transform={`translate(0,${depth})`}
-                          fill="#283f3b"
-                          stroke="#142b31"
-                          strokeWidth="1"
-                        />
-                      ))}
-                      <path
-                        d={d}
-                        fill={p.color}
-                        fillOpacity={lifted ? 1 : 0.76}
-                        stroke={lifted ? '#ffe6a8' : '#b5cabe77'}
-                        strokeWidth={lifted ? 2 : 1}
-                        className="province-top"
-                      />
-                      {!['KR-11', 'KR-28', 'KR-30', 'KR-50', 'KR-29', 'KR-27', 'KR-31'].includes(
-                        p.iso,
-                      ) && (
-                        <text x={centroid[0]} y={centroid[1]} className="province-label">
-                          {p.short}
-                        </text>
-                      )}
-                    </g>
-                    <path
-                      className="province-hit"
-                      d={d}
-                      fill="transparent"
-                      stroke="transparent"
-                      strokeWidth="4"
-                      role="button"
-                      tabIndex={focus ? -1 : 0}
-                      aria-label={`${p.name} 시군 지도 펼치기`}
-                      onMouseEnter={() => lift(p.iso)}
-                      onFocus={() => setActive(p)}
-                      onClick={() => enter(p)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          enter(p);
-                        }
-                      }}
-                    />
-                  </g>
+                  <path
+                    key={p.iso}
+                    className="province-hit"
+                    pointerEvents="fill"
+                    d={d}
+                    fill="transparent"
+                    stroke="transparent"
+                    strokeWidth="4"
+                    role="button"
+                    tabIndex={focus ? -1 : 0}
+                    aria-label={`${p.name} 시군 지도 펼치기`}
+                    onMouseEnter={() => lift(p.iso)}
+                    onMouseLeave={() => lower(p.iso)}
+                    onFocus={() => lift(p.iso)}
+                    onBlur={() => lower(p.iso)}
+                    onClick={() => enter(p)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        enter(p);
+                      }
+                    }}
+                  />
                 );
               })}
               {!focus &&
@@ -478,9 +495,9 @@ export default function BattleMap({
         )}
         {!focus && active && !list && (
           <div className="province-lift-label">
-            <span className="eyebrow">OPENING THE WORLD</span>
+            <span className="eyebrow">READY TO EXPLORE</span>
             <strong>{active.name}</strong>
-            <span>{active.regions.length}개의 시·군·구를 펼치는 중…</span>
+            <span>클릭하면 {active.regions.length}개의 시·군·구가 펼쳐져요</span>
           </div>
         )}
         {!list && (
@@ -510,7 +527,7 @@ export default function BattleMap({
             </span>
             <div>
               <strong>지도를 만지면, 모험이 시작됩니다.</strong>
-              <p>도에 마우스를 올리면 땅이 솟아오르고 시·군·구가 펼쳐져요.</p>
+              <p>마우스를 올리면 땅이 솟아올라요. 클릭해서 시·군·구를 탐험하세요.</p>
             </div>
           </div>
         )}

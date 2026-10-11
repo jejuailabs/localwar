@@ -20,6 +20,12 @@ await page.mouse.move(
   provinceLabel.x + provinceLabel.width / 2,
   provinceLabel.y + provinceLabel.height / 2,
 );
+await page.waitForTimeout(700);
+await page.screenshot({ path: 'docs/previews/province-hover.png', fullPage: true });
+await page.mouse.click(
+  provinceLabel.x + provinceLabel.width / 2,
+  provinceLabel.y + provinceLabel.height / 2,
+);
 await page.locator('.county-board').waitFor();
 await page.waitForTimeout(950);
 await page.screenshot({ path: 'docs/previews/chungbuk-desktop.png', fullPage: true });

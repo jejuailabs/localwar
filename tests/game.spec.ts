@@ -1,19 +1,30 @@
 import { test, expect } from '@playwright/test';
 import { QUESTIONS } from '../lib/questions';
 import { CATEGORIES } from '../packages/shared/game';
-test('province rollover expands actual counties and county click opens 16 choices', async ({
+test('province hover stays on the flat national map until click, then county click opens 16 choices', async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
   await expect(page.locator('.province-hit')).toHaveCount(17);
+  await expect(page.locator('.province-island.lifted')).toHaveCount(0);
+  expect(
+    await page
+      .locator('.province-side')
+      .evaluateAll((sides) => sides.every((side) => getComputedStyle(side).opacity === '0')),
+  ).toBe(true);
   const label = await page
     .locator('text.province-label')
     .filter({ hasText: /^충북$/ })
     .boundingBox();
   expect(label).not.toBeNull();
   await page.mouse.move(label!.x + label!.width / 2, label!.y + label!.height / 2);
+  await expect(page.locator('.province-island.lifted')).toHaveCount(1);
+  await page.waitForTimeout(900);
+  await expect(page.locator('.county-hit')).toHaveCount(0);
+  await expect(page.locator('.province-lift-label')).toContainText('클릭하면');
+  await page.mouse.click(label!.x + label!.width / 2, label!.y + label!.height / 2);
   await expect(page.locator('.county-hit')).toHaveCount(11);
   await page.getByRole('button', { name: '충주시 퀴즈 선택', exact: true }).hover();
   await expect(page.locator('.county-game-card')).toContainText('충주시');
@@ -147,4 +158,42 @@ test('an unanswered question expires after 30 seconds and scores zero', async ({
   await expect(page.locator('.answer-feedback')).toContainText('시간 종료!', { timeout: 35000 });
   await expect(page.locator('.score-card h3')).toContainText('0');
   await expect(page.getByRole('button', { name: '다음 지역 이야기로', exact: true })).toBeEnabled();
+});
+
+test('small Sejong remains selectable on hover and opens only on click or keyboard', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const sejong = page.getByRole('button', { name: '세종특별자치시 시군 지도 펼치기', exact: true });
+  const target = await sejong.evaluate((node) => {
+    const path = node as SVGPathElement;
+    const box = path.getBBox();
+    const matrix = path.getScreenCTM()!;
+    for (let y = 0.1; y < 1; y += 0.1) {
+      for (let x = 0.1; x < 1; x += 0.1) {
+        const point = new DOMPoint(box.x + box.width * x, box.y + box.height * y);
+        const screen = point.matrixTransform(matrix);
+        if (path.isPointInFill(point) && document.elementFromPoint(screen.x, screen.y) === path)
+          return { x: screen.x, y: screen.y };
+      }
+    }
+    throw new Error('Sejong has no selectable interior');
+  });
+  await page.mouse.move(target.x, target.y);
+  await page.waitForTimeout(900);
+  await expect(page.locator('.province-lift-label strong')).toHaveText('세종특별자치시');
+  await expect(page.locator('.province-island.lifted')).toHaveCount(1);
+  await expect(page.locator('.county-hit')).toHaveCount(0);
+  await page.mouse.move(0, 0);
+  await expect(page.locator('.province-island.lifted')).toHaveCount(0);
+  await page.mouse.move(target.x, target.y);
+  await page.mouse.click(target.x, target.y);
+  await expect(page.locator('.county-hit')).toHaveCount(1);
+  await page.getByRole('button', { name: '전국으로', exact: true }).click();
+  await expect(page.locator('.county-hit')).toHaveCount(0);
+  await sejong.focus();
+  await page.waitForTimeout(600);
+  await expect(page.locator('.county-hit')).toHaveCount(0);
+  await sejong.press('Enter');
+  await expect(page.locator('.county-hit')).toHaveCount(1);
 });
