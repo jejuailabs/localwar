@@ -303,19 +303,19 @@ export default function Game() {
             <Flag size={23} />
           </span>
           <span className="eyebrow">YOUR NEXT MISSION</span>
-          <h4>{progress.visited.length >= 3 ? '새 기록에 도전하기' : '세 지역, 세 가지 이야기'}</h4>
+          <h4>{progress.visited.length >= 3 ? '새 기록에 도전하기' : '새 지역, 새로운 이야기'}</h4>
           <p>
             {progress.visited.length >= 3
               ? '난이도를 올려 최고 점수를 갱신해보세요.'
-              : '서귀포·충주·종로를 탐험하고 전국 탐험가 배지를 모으세요.'}
+              : '새로운 지역 3곳에서 원정을 완료하고 전국 탐험가 배지를 모으세요.'}
           </p>
           <div className="quest-mini-progress">
-            {PLAYABLE_REGIONS.map((r) => (
-              <span className={progress.visited.includes(r.code) ? 'done' : ''} key={r.code}>
-                {progress.visited.includes(r.code) ? <Check size={12} /> : <MapPin size={12} />}
+            {Array.from({ length: 3 }, (_, index) => index).map((index) => (
+              <span className={progress.visited.length > index ? 'done' : ''} key={index}>
+                {progress.visited.length > index ? <Check size={12} /> : <MapPin size={12} />}
               </span>
             ))}
-            <b>{progress.visited.length}/3</b>
+            <b>{Math.min(3, progress.visited.length)}/3</b>
           </div>
         </div>
         <div className="sidebar-bottom">
@@ -459,7 +459,7 @@ export default function Game() {
                         <Swords size={17} />
                         지금 도전할 수 있는 지역
                       </h3>
-                      <span>3 REGIONS</span>
+                      <span>{PLAYABLE_REGIONS.length} REGIONS</span>
                     </div>
                     {PLAYABLE_REGIONS.map((r, i) => (
                       <button key={r.code} onClick={() => openRegion(r)} className="expedition-row">
@@ -792,7 +792,7 @@ export default function Game() {
               <div className="guide-cta">
                 <div>
                   <h3>이제, 당신의 첫 원정 차례.</h3>
-                  <p>제주 서귀포시·충북 충주시·서울 종로구에서 시작하세요.</p>
+                  <p>{PLAYABLE_REGIONS.map((r) => r.name).join(' · ')}에서 시작하세요.</p>
                 </div>
                 <button className="primary-button" onClick={() => nav('map')}>
                   지도 펼치기

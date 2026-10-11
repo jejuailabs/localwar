@@ -14,6 +14,7 @@ import {
 } from '../packages/shared/conquest';
 import { QUESTIONS } from '../lib/questions';
 import { EXTRA_QUESTIONS } from '../lib/question-bank';
+import { PLAYABLE_REGIONS } from '../lib/regions';
 import type { AnswerResult } from '../packages/shared/game';
 const bank = [...QUESTIONS, ...EXTRA_QUESTIONS];
 const answer = (correct: boolean, elapsedSec: number): AnswerResult => ({
@@ -64,7 +65,7 @@ test('every difficulty has 30 distinct facts balanced across playable areas', ()
     const qs = selectDaily(bank, level, '2026-10-11', 'player', []);
     assert.equal(qs.length, 30);
     assert.equal(new Set(qs.map(factKey)).size, 30);
-    assert.equal(new Set(qs.map((q) => q.regionCode)).size, 3);
+    assert.equal(new Set(qs.map((q) => q.regionCode)).size, PLAYABLE_REGIONS.length);
     assert.equal(new Set(qs.map((q) => q.category)).size, 4);
     assert.deepEqual(qs, selectDaily(bank, level, '2026-10-11', 'player', []));
     assert.notDeepEqual(
@@ -74,7 +75,7 @@ test('every difficulty has 30 distinct facts balanced across playable areas', ()
   }
 });
 test('each regional cell has at least 3 options and prefers unseen facts', () => {
-  for (const code of ['jeju-seogwipo', 'chungbuk-chungju', 'seoul-jongno'])
+  for (const code of PLAYABLE_REGIONS.map((r) => r.code))
     for (const category of ['history', 'people', 'food', 'travel'] as const)
       for (const level of [1, 2, 3, 4] as const) {
         const pool = bank.filter(

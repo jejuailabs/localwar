@@ -21,6 +21,15 @@ let questions = fs
   .replaceAll('@/packages/shared/game', './shared/game.js');
 fs.writeFileSync(path.join(root, 'functions/src/questions.ts'), questions);
 
+const catalogExport = spawnSync(
+  process.execPath,
+  [
+    path.join(root, 'node_modules/tsx/dist/cli.mjs'),
+    path.join(root, 'scripts/export-question-catalog.ts'),
+  ],
+  { cwd: root, stdio: 'inherit' },
+);
+if (catalogExport.status !== 0) process.exit(catalogExport.status || 1);
 const exported = spawnSync(
   process.execPath,
   [path.join(root, 'node_modules/tsx/dist/cli.mjs'), path.join(root, 'scripts/export-regions.ts')],
@@ -38,8 +47,17 @@ fs.copyFileSync(
 );
 let bank = fs
   .readFileSync(path.join(root, 'functions/src/question-bank.ts'), 'utf8')
-  .replaceAll('@/packages/shared/game', './shared/game.js');
+  .replaceAll('@/packages/shared/game', './shared/game.js')
+  .replace(/from '(\.\/question-bank-[^']+)'/g, (_match, source) => `from '${source}.js'`);
 fs.writeFileSync(path.join(root, 'functions/src/question-bank.ts'), bank);
+for (const file of fs
+  .readdirSync(path.join(root, 'lib'))
+  .filter((file) => /^question-bank-.+\.ts$/.test(file))) {
+  const source = fs
+    .readFileSync(path.join(root, 'lib', file), 'utf8')
+    .replaceAll('@/packages/shared/game', './shared/game.js');
+  fs.writeFileSync(path.join(root, 'functions/src', file), source);
+}
 
 let conquest = fs
   .readFileSync(path.join(root, 'functions/src/shared/conquest.ts'), 'utf8')

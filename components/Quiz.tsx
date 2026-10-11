@@ -31,7 +31,7 @@ import {
   type AnswerResult,
   type SessionResult,
 } from '@/packages/shared/game';
-import type { Region } from '@/lib/regions';
+import { PLAYABLE_REGIONS, type Region } from '@/lib/regions';
 import { getGateway } from '@/lib/gateway';
 import type { BattleState } from '@/packages/shared/conquest';
 import { REGION_ART } from '@/lib/art';
@@ -278,7 +278,7 @@ export function RegionChallenge({
           <p className="selection-note">
             {region.playable
               ? '같은 난이도도 자유롭게 선택할 수 있어요. 선택 순서대로 출제됩니다.'
-              : '지금은 서귀포시·충주시·종로구에서 퀴즈에 도전할 수 있어요.'}
+              : `지금은 ${PLAYABLE_REGIONS.map((r) => r.name).join('·')}에서 퀴즈에 도전할 수 있어요.`}
           </p>
         </>
       </section>

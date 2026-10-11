@@ -1,0 +1,434 @@
+[
+  {
+    "factId": "gyeongju-wolseong-silla-palace",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "경주 월성은 신라 시대 왕궁의 유적입니다.",
+    "sourceUrl": "https://gyeongju.go.kr/tour/page.do?mnu_uid=4707",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-cheomseongdae-astronomy",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "첨성대는 신라의 천문 관측 시설로 알려진 경주의 대표 유적입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2299",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bulguksa-buddhist-temple",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "불국사는 통일신라의 불교 예술과 건축을 보여 주는 사찰입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=260&cmd=2&code_uid=1044&mnu_uid=4781&pageNo=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bulguksa-two-pagodas",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "불국사 대웅전 앞에는 다보탑과 석가탑으로 불리는 삼층석탑이 마주 서 있습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=264&cmd=2&code_uid=1044&listType=&mnu_uid=2349&sortKwd=&srchKwd=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-cheonmachong-painting-mudguard",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "천마도는 안장 옆에 늘어뜨려 흙이 튀는 것을 막는 말다래에 그려진 그림입니다.",
+    "sourceUrl": "https://gyeongju.go.kr/tour/page.do?mnu_uid=4707",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-wolseong-half-moon-shape",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "월성은 하늘에서 보면 반달 형태를 보여 반월성이라고도 불립니다.",
+    "sourceUrl": "https://gyeongju.go.kr/tour/page.do?mnu_uid=4707",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bulguksa-seokguram-world-year",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "불국사와 석굴암은 1995년에 함께 유네스코 세계유산에 등재됐습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=260&cmd=2&code_uid=1044&mnu_uid=4781&pageNo=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-historic-areas-five",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "경주역사유적지구는 남산·월성·대릉원·황룡사·산성의 다섯 지구로 나뉩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2533",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-wolji-munmu-674",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "경주시는 삼국사기 기록을 바탕으로 문무왕 14년인 674년에 월지가 조성됐다고 설명합니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=50&cmd=2&code_uid=1012&mnu_uid=4716",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-hwangnyong-mongol-destruction",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "경주의 황룡사는 고려 시대 몽골군 침입으로 소실됐습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=68&cmd=2&code_uid=1012&listType=&mnu_uid=2292&pageNo=4&sortKwd=&srchKwd=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-dharani-seokgatap-discovery",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "무구정광대다라니경은 1966년 불국사 삼층석탑 해체·수리 때 발견됐습니다.",
+    "sourceUrl": "https://www.museum.go.kr/MUSEUM/contents/M0701040000.do?arcId=2839&catCustomType=post&catId=93&cp=208&schM=view&sv=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-seokguram-artificial-granite",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "history",
+    "claim": "석굴암은 토함산 중턱에 화강암을 사용하여 인위적으로 조성한 석굴입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=258&cmd=2&code_uid=1044&listType=&mnu_uid=4781&pageNo=1&sortKwd=&srchKwd=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bak-hyeokgeose-first-king",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "경주 오릉 설명에는 신라 초대 왕 박혁거세와 알영왕비가 전합니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2300",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-seondeok-first-queen",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "선덕여왕은 신라 제27대 왕이자 한국사 최초의 여왕입니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n101170",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-kim-yusin-military-leader",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "김유신은 신라의 대표 장군으로 삼국통일 전쟁에서 활약했습니다.",
+    "sourceUrl": "https://contents.history.go.kr/front/kc/printViewPopup.do?levelId=kc_n100710",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-choe-chiwon-tang-writer",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "신라 문인 최치원은 당나라에서 공부하고 뛰어난 문장으로 이름을 떨쳤습니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n101780",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-wonhyo-hwajaeng",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "원효는 불교 사상과 종파 사이의 대립을 일심으로 통합하는 화쟁을 주장했습니다.",
+    "sourceUrl": "https://contents.history.go.kr/front/kc/printViewPopup.do?levelId=kc_n101460",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-munmu-east-sea-tomb",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "문무왕은 동해 바다 입구의 큰 바위에 장사하라는 유언을 남겼고 경주 문무대왕릉으로 전합니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n101010",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-choe-jeu-donghak",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "최제우는 동학을 창시했으며 경주 현곡면 용담정은 그와 관련된 성지입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=3172",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-yi-eonjeok-oksan-scholar",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "옥산서원은 조선 성리학자 회재 이언적을 기리기 위해 세운 서원입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2550",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-seol-chong-chinese-sound-meaning",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "설총은 한자의 음훈을 활용하여 신라 말을 표현하고 유교 경전의 뜻을 해석했다고 전합니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/ta/view.do?levelId=ta_p41r_0080_0030_0060_0010",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-kim-chunchu-first-jingol-king",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "태종무열왕 김춘추는 최초의 진골 왕으로 나당 군사동맹과 백제 정벌을 추진했습니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n101810",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-sinmun-manpasikjeok-story",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "만파식적은 신문왕 때 신비한 피리를 얻어 나라의 평온을 바랐다는 설화입니다.",
+    "sourceUrl": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_r100360",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-jajang-hwangnyong-pagoda-proposal",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "people",
+    "claim": "경주시의 황룡사지 설명은 자장의 권유로 구층목탑을 짓기 시작했다고 소개합니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=68&cmd=2&code_uid=1012&listType=&mnu_uid=2292&pageNo=4&sortKwd=&srchKwd=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-hwangnam-bread-redbean",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "황남빵은 팥을 가득 넣은 경주의 대표 간식입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2342",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-chalbori-bread-grain",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "경주시는 찰보리빵을 경주산 찰보리와 통귀리를 주원료로 하는 간식으로 소개합니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2342",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-gyodong-beopju-traditional-alcohol",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "경주교동법주는 경주 최씨 가문에서 전승된 가양주입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?mnu_uid=4615",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-byeolchaeban-local-brand",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "별채반은 경주 지역 식재료를 활용하는 향토 음식 브랜드입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2286",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-daereung-cake-tomb-shape",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "대릉빵은 경주의 둥근 고분 모양을 가져와 만든 치즈 수플레 케이크로 소개됩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2342",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-haeparang-seafood-brand",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "해파랑은 경주 어민들의 수산물 공동 브랜드입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?mnu_uid=4615",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-gondalbi-bibimbap-seasoning",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "별채반 곤달비 비빔밥은 고추장 대신 된장과 멸치가루로 만든 양념장을 사용한다고 소개됩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2286",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-juryeonggu-bread-fourteen-faces",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "주령구빵은 동궁과 월지에서 출토된 14면체 놀이 주사위 주령구를 본떴습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2342",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-esageum-royal-title-brand",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "이사금은 신라 임금의 칭호에서 이름을 가져온 경주 농산물 공동 브랜드입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?mnu_uid=4615",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-gyodong-beopju-saongwon-origin",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "경주시 설명에 따르면 최국선은 사옹원 참봉을 지낸 뒤 낙향하여 교동법주를 빚었습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?mnu_uid=4615",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-six-villages-yukgaejang-name",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "6부촌육개장은 신라 건국의 바탕이 된 서라벌 여섯 부족의 마을에서 이름을 가져왔습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2286",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-smile-bread-roof-tile",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "food",
+    "claim": "천년미소빵은 신라인의 미소로 불리는 얼굴무늬 수막새를 본뜬 빵으로 소개됩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2342",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bomun-artificial-lake",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "보문호는 경주 동쪽 명활산 옛 성터 아래에 만들어진 인공 호수입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2942",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-gyochon-hanok-village",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "교촌마을에는 경주 최씨 가문의 고택과 한옥이 어우러져 있습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=3164",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-hwangridan-hwangnam-neighborhood",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "황리단길은 황남동 포석로 일대의 황남 큰길이라 불리던 골목을 중심으로 형성됐습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/design/tour2019/file/HroadMap.pdf",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-yangnam-fan-columnar-joints",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "양남 주상절리군에는 둥글게 펼쳐진 부채꼴 주상절리를 비롯한 다양한 형태가 있습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2535",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-woljeong-bridge-namcheon",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "경주 월정교는 문천이라고도 부르는 남천 위에 놓인 교량입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2299",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-gampo-east-coast-port",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "경주의 감포항에서는 어선이 드나들고 활어 위판장에서 생선 경매가 이루어집니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=160&cmd=2&code_uid=1016&mnu_uid=2294&pageNo=2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-yangdong-two-clans",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "양동마을은 월성 손씨와 여강 이씨 두 가문이 이어 온 동족마을입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour/page.do?area_uid=241&cmd=2&code_uid=1045&listType=&mnu_uid=4782&pageNo=2&sortKwd=&srchKwd=",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-oksan-world-seowon-year",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "경주 옥산서원은 2019년 한국의 서원의 일부로 유네스코 세계유산에 등재됐습니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2550",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-namsan-bulgok-tapgok-sites",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "경주 남산의 동남산 탐방 코스에는 불곡 마애여래좌상과 탑곡 마애불상군이 포함됩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=2540",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-myeonghwal-fortress-mountain",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "경주 명활성은 경주 동쪽 명활산 꼭대기에 자연석을 쌓아 만든 신라 산성입니다.",
+    "sourceUrl": "https://my.heritage.go.kr/public/commentary/culSelectDetail.do?ccbaAsno=0000470000000&ccbaCpno=1333700470000&ccbaCtcd=37&ccbaKdcd=13",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-bunhwang-mojeon-stone-brick",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "분황사 모전석탑은 돌을 벽돌 모양으로 다듬어 쌓은 석탑입니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?chaNo=330&cmd=2&mnu_uid=2515",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gyeongju-poseokjeong-flowing-cup-poetry",
+    "regionCode": "gyeongbuk-gyeongju",
+    "category": "travel",
+    "claim": "포석정은 흐르는 물에 술잔을 띄워 잔이 멈추기 전에 시를 읊는 유상곡수연 유적으로 소개됩니다.",
+    "sourceUrl": "https://www.gyeongju.go.kr/tour_bak/page.do?mnu_uid=4079",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  }
+]

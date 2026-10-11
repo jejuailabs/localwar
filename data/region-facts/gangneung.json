@@ -1,0 +1,434 @@
+[
+  {
+    "factId": "gangneung-dano-festival",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "강릉단오제에는 제례, 단오굿과 민속놀이가 함께 전승됩니다.",
+    "sourceUrl": "https://www.gn.go.kr/dano/contents.do?key=5816",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-seongyojang-residence",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "선교장은 조선 후기 사대부가의 상류주택입니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/about/gastronomy",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-hyanggyo-functions",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "강릉향교는 강학공간과 배향공간을 갖추어 교육과 제사를 담당했습니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/about/gastronomy",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpodae-eight-views",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "경포대는 관동팔경에 속하는 명승입니다.",
+    "sourceUrl": "https://www.gn.go.kr/tour/html/tour/sub01/sub01_06_10.html",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-imyeonggwan-royal-tablet",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "객사인 임영관에는 왕을 상징하는 나무패를 모셨습니다.",
+    "sourceUrl": "https://digital.khs.go.kr/heri/heriDetail.do?ctptUid=13898859666170200042",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-dano-lunar-date",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "단오는 음력 5월 5일이며 강릉단오제의 날짜도 음력을 기준으로 합니다.",
+    "sourceUrl": "https://www.gn.go.kr/dano/contents.do?key=5816",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpodae-relocation",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "경포대는 1508년 중종 3년에 현재 자리로 옮겨졌습니다.",
+    "sourceUrl": "https://www.gn.go.kr/tour/html/tour/sub01/sub01_06_10.html",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-hyanggyo-foundation",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "강릉향교의 첫 건립은 고려 충선왕 5년인 1313년으로 안내됩니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/about/gastronomy",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-sammun-roof",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "임영관 삼문의 지붕은 맞배지붕입니다.",
+    "sourceUrl": "https://digital.khs.go.kr/heri/heriDetail.do?ctptUid=13898859666170200042",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-sammun-jusimpo",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "임영관 삼문의 공포구조는 주심포 양식입니다.",
+    "sourceUrl": "https://digital.khs.go.kr/heri/heriDetail.do?ctptUid=13898859666170200042",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-dano-hogaedeung",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "전수교육관은 호개등을 하늘을 덮는 등불이라는 뜻으로 설명합니다.",
+    "sourceUrl": "https://www.gn.go.kr/dano/contents.do?key=5824",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpodae-interior-steps",
+    "regionCode": "gangwon-gangneung",
+    "category": "history",
+    "claim": "경포대 내부는 호수를 입체적으로 바라보도록 전체 3단으로 구성됩니다.",
+    "sourceUrl": "https://www.kh.or.kr/visit/kor/road/2/view.do?key=2408220002",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-yulgok-mother",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "율곡 이이의 어머니는 사임당 신씨입니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=634",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyun-honggildong",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "강릉시 허균 안내에는 홍길동전이 주요 저서로 실려 있습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=633",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-nanseolheon-poet",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "허난설헌은 조선의 시인으로 여러 한시를 남겼습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=635",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-yulgok-gyeokmong",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "격몽요결은 율곡 이이의 주요 저서입니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=634",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-nanseolheon-name",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "허난설헌의 이름은 초희이고 난설헌은 호입니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=635",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-saimdang-chochungdo",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "초충도는 강릉시 신사임당 안내의 대표 작품 목록에 실려 있습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=636",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyun-poetry-teacher",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "허균은 삼당시인 이달에게 시를 배웠습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=633",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-saimdang-husband",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "신사임당의 남편은 이원수입니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=636",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-yulgok-toegye-exchange",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "이이는 23세에 퇴계 이황을 방문하여 학문을 교류했습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=634",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyun-zhuzhifan",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "허균은 1606년 명나라 사신 주지번에게 난설헌의 시를 보여 주었습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=633",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-nanseolheon-collected-manuscript",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "허난설헌의 유작을 모아 난설헌고를 편집한 사람은 동생 허균입니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=635",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-yulgok-sillok",
+    "regionCode": "gangwon-gangneung",
+    "category": "people",
+    "claim": "이이는 부교리로 춘추관기사관을 겸하며 명종실록 편찬에 참여했습니다.",
+    "sourceUrl": "https://www.gn.go.kr/www/contents.do?key=634",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-tofu-seawater",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "초당두부는 바닷물을 간수로 이용하는 전통 두부입니다.",
+    "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=b925aa8f-07a7-48da-97e0-a38af23c9763",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-ongsimi-potato",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "강릉의 감자옹심이는 감자 전분을 이용해 만듭니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-jangkalguksu-pastes",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "장칼국수는 된장과 고추장을 활용한 음식입니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-mulhoe-boat-meal",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "강릉시는 물회의 시작을 어부들의 배 위 식사로 설명합니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-coffee-black-sesame",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "강릉시 커피 소개는 흑임자라떼를 지역 식재 활용 메뉴로 듭니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food4",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-dano-rice-donations",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "단오 신주와 수리취떡에는 시민들이 모은 쌀을 사용합니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food3",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-jangkalguksu-origin",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "산간지방에서 구하기 어려운 소금 대신 장을 썼다고 전해집니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-coffee-vending-origin",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "강릉시 커피 소개는 안목항 커피자판기의 인스턴트 커피 문화를 설명합니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food4",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-surichwi-wheel-stamp",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "수리취떡은 수레바퀴 모양 떡살로 문양을 낸 절편입니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food3",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-dongpo-tea-foundation",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "강릉시 전통음식 자료의 동포다도회 창립 연도는 1982년입니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food2",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-yerim-azalea-wine",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "예림회는 봄 진달래로 두견주를 담가 제주로 씁니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food3",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-songyeopdugyeonju-pine",
+    "regionCode": "gangwon-gangneung",
+    "category": "food",
+    "claim": "송엽두견주는 두견주에 소나무 솔잎을 더해 만드는 술입니다.",
+    "sourceUrl": "https://www.gn.go.kr/creativecity/html/food/food3",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-anmok-coffee-beach",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "안목커피거리는 강릉 안목해변에 조성되었습니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-jeongdongjin-sunrise",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "정동진은 새해 해돋이를 감상하는 명소입니다.",
+    "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=68d7389a-8893-413d-97ce-c0862b0ff673",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpo-lake-name",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "강릉시 관광자료는 경포호 이름을 거울 같은 맑은 호수와 연결합니다.",
+    "sourceUrl": "https://www.gn.go.kr/tour/html/tour/sub01/sub01_06_10.html",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-bts-hyangho-beach",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "BTS 정류장 촬영 장소는 주문진 향호해변입니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-anbandegi-elevation",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "안반데기는 해발 1,100m의 고산지대에 있습니다.",
+    "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=48c47eed-0ce0-47c3-a8b3-95233c761c75",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-geumjin-okgye",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "금진해변은 강릉시 옥계면 금진리에 있습니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-heonhwaro-endpoints",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "헌화로는 금진리와 심곡리 사이의 해안도로입니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-anban-name-object",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "안반은 떡메로 반죽을 칠 때 쓰는 나무 받침판입니다.",
+    "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=48c47eed-0ce0-47c3-a8b3-95233c761c75",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-haslla-pinocchio",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "하슬라 아트월드에는 피노키오박물관이 있습니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpo-legend-book",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "경포호 장자못 전설의 기록 문헌으로 이중환의 택리지를 소개합니다.",
+    "sourceUrl": "https://www.gn.go.kr/tour/html/tour/sub01/sub01_06_10.html",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-gyeongpo-wetland-land",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "강릉시 관광자료의 습지복원 농경지 매입 면적은 29만㎡입니다.",
+    "sourceUrl": "https://www.gn.go.kr/tour/html/tour/sub01/sub01_06_10.html",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "gangneung-mojeong-tower-builder",
+    "regionCode": "gangwon-gangneung",
+    "category": "travel",
+    "claim": "노추산 모정탑을 쌓기 시작한 사람은 차순옥 할머니입니다.",
+    "sourceUrl": "https://gn.go.kr/creativecity/html/about/resources",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  }
+]

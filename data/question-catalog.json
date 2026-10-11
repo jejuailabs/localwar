@@ -1,0 +1,32 @@
+[
+  {
+    "regionCode": "jeju-seogwipo",
+    "questionCount": 48,
+    "ready": true
+  },
+  {
+    "regionCode": "chungbuk-chungju",
+    "questionCount": 48,
+    "ready": true
+  },
+  {
+    "regionCode": "seoul-jongno",
+    "questionCount": 48,
+    "ready": true
+  },
+  {
+    "regionCode": "gyeongbuk-gyeongju",
+    "questionCount": 48,
+    "ready": true
+  },
+  {
+    "regionCode": "jeonbuk-jeonju",
+    "questionCount": 48,
+    "ready": true
+  },
+  {
+    "regionCode": "gangwon-gangneung",
+    "questionCount": 48,
+    "ready": true
+  }
+]

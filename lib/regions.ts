@@ -1,4 +1,5 @@
 import counties from '@/data/counties.json';
+import questionCatalog from '@/data/question-catalog.json';
 export type Region = {
   code: string;
   name: string;
@@ -471,23 +472,30 @@ export const PROVINCES: Province[] = SEED_PROVINCES.map((p) => ({
     .filter((c) => c.provinceIso === p.iso)
     .map((c) => {
       const known = p.regions.find((r) => r.name === c.name);
-      return known
-        ? { ...known, lat: c.lat, lng: c.lng }
-        : r(
-            `${p.iso}-${c.id}`,
-            c.name,
-            p.short,
-            c.lat,
-            c.lng,
-            `${c.name}에 숨은 이야기를 찾아 떠나는 새로운 원정.`,
-            `${p.short} 지역 탐험`,
-          );
+      const mapped =
+        known ??
+        r(
+          `${p.iso}-${c.id}`,
+          c.name,
+          p.short,
+          c.lat,
+          c.lng,
+          `${c.name}에 숨은 이야기를 찾아 떠나는 새로운 원정.`,
+          `${p.short} 지역 탐험`,
+        );
+      return {
+        ...mapped,
+        lat: c.lat,
+        lng: c.lng,
+        playable: questionCatalog.some((entry) => entry.regionCode === mapped.code && entry.ready),
+      };
     }),
 }));
 export const REGIONS = PROVINCES.flatMap((p) => p.regions);
-export const PLAYABLE_REGIONS = REGIONS.filter((r) => r.playable).sort(
-  (a, b) =>
-    ['jeju-seogwipo', 'chungbuk-chungju', 'seoul-jongno'].indexOf(a.code) -
-    ['jeju-seogwipo', 'chungbuk-chungju', 'seoul-jongno'].indexOf(b.code),
-);
+const preferredOrder = ['jeju-seogwipo', 'chungbuk-chungju', 'seoul-jongno'];
+export const PLAYABLE_REGIONS = REGIONS.filter((r) => r.playable).sort((a, b) => {
+  const left = preferredOrder.indexOf(a.code),
+    right = preferredOrder.indexOf(b.code);
+  return (left < 0 ? preferredOrder.length : left) - (right < 0 ? preferredOrder.length : right);
+});
 export const regionByCode = (code: string) => REGIONS.find((r) => r.code === code);

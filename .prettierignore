@@ -12,3 +12,5 @@ docs/previews
 firestore.rules
 functions/src/shared
 functions/src/questions.ts
+
+functions/src/question-bank-*.ts

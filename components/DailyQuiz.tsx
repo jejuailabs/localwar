@@ -11,10 +11,11 @@ import {
   Trophy,
 } from 'lucide-react';
 import { getGateway, backendMode } from '@/lib/gateway';
-import { PROVINCES, regionByCode } from '@/lib/regions';
+import { PROVINCES, PLAYABLE_REGIONS, regionByCode } from '@/lib/regions';
 import { LEVELS, type Level, type GameSession, type SessionResult } from '@/packages/shared/game';
 import type { BattleState, Preferences } from '@/packages/shared/conquest';
 import { QuizPlay } from './Quiz';
+import questionCatalog from '@/data/question-catalog.json';
 const genderLabels = { unspecified: '응답하지 않음', female: '여성', male: '남성', other: '기타' };
 const ageLabels = {
   unspecified: '응답하지 않음',
@@ -277,7 +278,10 @@ export default function DailyQuiz({
             <br />
             정확하게, 빠르게 맞혀 오늘의 지원을 보내세요.
           </p>
-          <p>프리시즌 문제 풀 · 서귀포·충주·종로 144문항</p>
+          <p>
+            프리시즌 문제 풀 · {PLAYABLE_REGIONS.length}개 지역{' '}
+            {questionCatalog.reduce((sum, entry) => sum + entry.questionCount, 0)}문항
+          </p>
           <div className="daily-chips">
             <span>
               <CheckCircle2 size={15} /> 정답률 중심

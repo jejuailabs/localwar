@@ -1,3 +1,6 @@
+import { GYEONGJU_QUESTIONS } from './question-bank-gyeongju';
+import { JEONJU_QUESTIONS } from './question-bank-jeonju';
+import { GANGNEUNG_QUESTIONS } from './question-bank-gangneung';
 import type { Category, Level, Question } from '@/packages/shared/game';
 
 // Authored questions: the first choice is canonical; the server shuffles and selects vetted distractors.
@@ -1054,4 +1057,7 @@ export const EXTRA_QUESTIONS: Question[] = [
   ...materialize('jeju-seogwipo', jeju),
   ...materialize('chungbuk-chungju', chungju),
   ...materialize('seoul-jongno', jongno),
+  ...GYEONGJU_QUESTIONS,
+  ...JEONJU_QUESTIONS,
+  ...GANGNEUNG_QUESTIONS,
 ];

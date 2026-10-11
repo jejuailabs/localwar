@@ -15,3 +15,5 @@ firebase-debug.log
 firestore-debug.log
 .vercel
 next-env.d.ts
+
+functions/src/question-bank-*.ts

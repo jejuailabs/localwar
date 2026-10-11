@@ -1,0 +1,434 @@
+[
+  {
+    "factId": "jeonju-gyeonggi-portrait-purpose",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "경기전은 태조의 초상화인 어진을 봉안하기 위해 세운 전각입니다.",
+    "sourceUrl": "https://hanok.jeonju.go.kr/contents/place",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-hyanggyo-education",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "전주향교는 유교를 가르치고 지방민을 교육하던 기관입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000112002009000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-pungnam-south-gate",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "풍남문은 전주성의 남문이며 지금 남아 있는 전주성 성문입니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/qrcode/112.jsp?landingurl=112",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-wanpan-printing",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "전주에서 만든 책은 완판본으로 불렸으며 조선 후기 출판문화의 한 축을 이뤘습니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041a9fe53a7c",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-jeolla-name-origin",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "전주권과 나주권을 합쳐 전라도가 되었다는 전주시 역사 설명에 따른 답입니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041a9fe53a7c",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gamyeong-jeju-jurisdiction",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "조선의 전라감영 관할 지역에는 오늘날의 전북·전남과 제주가 포함됐습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=10114&menuCd=DOM_000000101006001000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gyeonggi-foundation-reign",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "경기전의 창건 시점은 태종 10년인 1410년입니다.",
+    "sourceUrl": "https://hanok.jeonju.go.kr/contents/place",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-sago-surviving-records",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "조선 전기 4대 사고 가운데 전주사고의 실록만 전란에서 보존됐습니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818b5bc5cf018ba8ca7216641f&contentUid=ff8080818990c349018b041a87fe3960&dataUid=476bee899116482c8c628e89a053657b&page=3231",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-pungnam-reconstruction-reign",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "현재 풍남문 문루는 영조 44년인 1768년에 재건됐습니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/qrcode/112.jsp?landingurl=112",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gyeonggi-renaming",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "태조 어진 봉안 전각은 세종 24년인 1442년에 경기전이라는 이름을 얻었습니다.",
+    "sourceUrl": "https://hanok.jeonju.go.kr/contents/place",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gyeonggi-rebuilt-after-jeongyu",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "경기전은 1597년 정유재란 때 소실된 뒤 광해군 6년인 1614년에 중건됐습니다.",
+    "sourceUrl": "https://hanok.jeonju.go.kr/contents/place",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gamyeong-seonhwadang-loss",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "history",
+    "claim": "전라감영의 선화당은 1951년 폭발 사고로 불탔습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=10114&menuCd=DOM_000000101006001000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-choi-novelist",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "최명희문학관은 소설가 최명희의 문학정신을 기리는 공간입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9797&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gyeonhwon-founder",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "견훤은 전주를 왕도로 삼아 후백제를 세웠습니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041a9fe53a7c",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-taejo-dynasty",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "전주를 본향으로 하는 이성계는 조선을 세운 태조입니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041a9fe53a7c",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-choi-honbul",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "최명희는 소설 혼불을 집필한 작가로 전주 문학관에서 소개합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9797&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-imok-ian-sa",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "이목대는 태조의 4대조 목조 이안사의 유허입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9742&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-jeongmongju-mangyeongdae",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "전주시 안내는 이성계의 뜻을 알아챈 정몽주가 남고산성 만경대에서 고려를 걱정하는 시를 읊었다는 전승을 소개합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9742&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gojong-monument-handwriting",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "오목대의 태조고황제주필유지 비는 고종의 친필을 새긴 것입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9742&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-choidam-hanbyeok",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "전주시 도로명 유래 자료는 한벽당을 세운 인물로 월당 최담을 소개합니다.",
+    "sourceUrl": "https://jeonju.go.kr/images/www/rname1_view.pdf",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-ahn-son-preserved-records",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "안의와 손홍록은 임진왜란 때 전주사고 실록과 태조 어진을 내장산으로 옮겨 보존하는 데 참여했습니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818b5bc5cf018ba8ca7216641f&contentUid=ff8080818990c349018b041a87fe3960&dataUid=9be517a879660820017a320514e57073&page=1231",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-ian-sa-yongbieocheonga",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "전주시 오목대·이목대 설명은 이안사 가문의 옛 거처에 관한 내용이 용비어천가에도 묘사돼 있다고 안내합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9742&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-taejo-daepungga",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "오목대에서 이성계가 대풍가를 읊으며 건국의 뜻을 드러냈다는 이야기가 전해집니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9742&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-choi-language-fingerprint",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "people",
+    "claim": "최명희는 1998년 호암상 수상소감에서 언어를 정신의 지문, 모국어를 모국의 혼에 비유했습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&contentsSid=1&dataSid=9797&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-bibimbap-signature",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "전주비빔밥은 여러 식재료를 한 그릇에 조화롭게 담아 비벼 먹는 전주의 대표 음식입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104003006000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-kongnamul-main-ingredient",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "전주 콩나물국밥은 밥과 콩나물에 국물을 더해 먹는 향토음식입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000023&dataSid=16226&menuCd=DOM_000000112001000000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-gamaek-abbreviation",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "가맥은 동네 가게에서 간단한 안주와 맥주를 즐기던 가게맥주의 줄임말입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000102001017000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-pisundae-blood",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "남부시장 피순대는 선지에 채소와 고기를 더해 돼지창자를 채운 순대입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104002001001",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-kongnamul-suran",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "남부시장식 콩나물국밥에는 날달걀과 참기름을 곁들인 수란이 함께 소개됩니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104002001001",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-moju-base",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "모주는 막걸리나 술지게미에 대추·계피·생강 등의 재료를 넣어 달여 만듭니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000055&dataSid=14461&menuCd=DOM_000000112011000000&paging=ok&searchType=DATA_TITLE&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-kongnamul-toryeom",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "남부시장식 콩나물국밥의 토렴은 밥과 콩나물을 뜨거운 국물에 여러 번 담그는 방식입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104002001001",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-leegang-name-ingredients",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "이강주라는 이름은 전통 소주에 넣는 배와 생강에서 비롯됩니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000055&dataSid=14461&menuCd=DOM_000000112011000000&paging=ok&searchType=DATA_TITLE&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-muljajang-no-chunjang",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "전주시 시정소식지는 물짜장이 춘장을 쓰지 않으면서 볶은 재료를 면에 얹는 조리 방식을 따른다고 설명합니다.",
+    "sourceUrl": "https://daum.jeonju.go.kr/main/menu?do=view&gc=WEBZINE7&webzine_code=EFCOz7MNoDx6a3b687f&wgroup_code=ZEEZiJR0IOd6a3b5eb8",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-leegang-production-order",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "공식 안내의 제조 과정은 약주를 증류한 뒤 재료별 침출과 숙성, 혼합과 도수 조절, 2차 숙성을 거쳐 병입하는 순서입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000055&dataSid=14461&menuCd=DOM_000000112011000000&paging=ok&searchType=DATA_TITLE&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-kongnamul-kim-sharing",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "남부시장 안내는 손님들이 장에서 산 김을 국밥집에서 나눠 먹고 남은 김을 두고 가던 문화에서 조합이 생겼다고 설명합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104002001001",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-bibimbap-rice-broth",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "food",
+    "claim": "전주시 전주비빔밥 안내는 특별한 조리법의 하나로 사골 육수로 지은 밥을 소개합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000104003006000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-hanok-traditional-houses",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주한옥마을은 도심 안에 전통 한옥이 모여 있는 주거와 문화 공간입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=16109&menuCd=DOM_000000101006003000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-deokjin-lotus",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "덕진공원은 여름 연꽃 군락지로 유명하며 덕진호에 연꽃이 핍니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000022&dataSid=12282&menuCd=DOM_000000101012000000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-namcheongyo-river",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "남천교는 전주천을 가로지르며 다리 위에 청연루가 있습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=16086&menuCd=DOM_000000101006003000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-jaman-wall-art",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "자만벽화마을은 한옥마을 뒤편 언덕의 담장과 골목에 벽화가 있는 마을입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=16022&menuCd=DOM_000000101006003000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-palbok-cassette-factory",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "팔복예술공장은 카세트테이프를 생산하던 공장을 재생한 복합문화공간입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000112002002000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-hyanggyo-ginkgo",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주향교 대성전과 명륜당 앞뜰에는 오래된 은행나무들이 있습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/index.jeonju?menuCd=DOM_000000112002009000",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-church-romanesque",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주시 전동성당 안내는 이 건축물을 로마네스크 양식으로 소개합니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=9752&menuCd=DOM_000000101006001000&paging=ok&searchType=DATA_TITLE&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-pungpaejigwan-guests",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주시 풍패지관 보도자료는 외국 사신 등 귀빈을 맞이하던 장소로 설명합니다.",
+    "sourceUrl": "https://www.jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818b5bc5cf018ba8ca7216641f&contentUid=ff8080818990c349018b041a87fe3960&dataUid=9be517a8914526ec0191cf78761d7608&page=225",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-seohak-artist-regeneration",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "서학동 예술마을은 예술가들이 낡은 집을 고쳐 작업실과 갤러리를 열면서 활기를 얻었습니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=16673&menuCd=DOM_000000101006003000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-hanbyeok-scenic-name",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주시 도로명 유래 자료는 한벽당을 전주팔경의 한벽청연과 연결해 설명합니다.",
+    "sourceUrl": "https://jeonju.go.kr/images/www/rname1_view.pdf",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-arboretum-restoration-research",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주수목원은 고속도로 건설로 훼손된 자연환경을 복구하고 식물을 보존·증식·보급하기 위해 식물종을 모아온 곳입니다.",
+    "sourceUrl": "https://tour.jeonju.go.kr/board/view.jeonju?boardId=BBS_0000003&dataSid=9775&menuCd=DOM_000000101006003000&paging=ok&startPage=1",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  },
+  {
+    "factId": "jeonju-jogyeong-ancestor",
+    "regionCode": "jeonbuk-jeonju",
+    "category": "travel",
+    "claim": "전주시 시정소식지는 조경단을 전주 이씨 시조 이한과 관련된 성역으로 소개합니다.",
+    "sourceUrl": "https://daum.jeonju.go.kr/main/menu?do=view&gc=WEBZINE1&webzine_code=5DOH0dqvXY369e81ff0&wgroup_code=eFyCHBuOx5c69e81a82",
+    "checkedAt": "2026-10-11",
+    "status": "reviewed"
+  }
+]

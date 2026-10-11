@@ -10,6 +10,11 @@ test('daily completes 30 questions, resumes without resetting time and supports 
   await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
   await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
   await expect(page.locator('.saved-support')).toContainText('서귀포시');
+  const beforeState = await (
+    await page.request.post('/api/game', { data: { action: 'state' } })
+  ).json();
+  const participantsBefore =
+    beforeState.standings.find((row: any) => row.regionCode === 'jeju-seogwipo')?.participants || 0;
   const start = page.waitForResponse(
     (r) => r.url().endsWith('/api/game') && r.request().postDataJSON().action === 'daily',
   );
@@ -63,10 +68,14 @@ test('daily completes 30 questions, resumes without resetting time and supports 
   expect(finish.daily.accuracy).toBe(100);
   const status = await (await page.request.post('/api/game', { data: { action: 'state' } })).json();
   expect(status.dailyDone).toBe(true);
-  expect(status.standings[0].participants).toBe(1);
+  expect(status.standings.find((row: any) => row.regionCode === s.regionCode)?.participants).toBe(
+    participantsBefore + 1,
+  );
   await page.request.post('/api/game', { data: { action: 'finish', sessionId: s.sessionId } });
   const again = await (await page.request.post('/api/game', { data: { action: 'state' } })).json();
-  expect(again.standings[0].participants).toBe(1);
+  expect(again.standings.find((row: any) => row.regionCode === s.regionCode)?.participants).toBe(
+    participantsBefore + 1,
+  );
   const today = await (
     await page.request.post('/api/game', { data: { action: 'daily', level: 4 } })
   ).json();

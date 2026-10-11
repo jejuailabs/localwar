@@ -9,7 +9,9 @@ import {
   validatePicks,
   type SessionResult,
 } from '../packages/shared/game';
-import { QUESTIONS } from '../lib/questions';
+import { QUESTIONS as BASE_QUESTIONS } from '../lib/questions';
+import { EXTRA_QUESTIONS } from '../lib/question-bank';
+const QUESTIONS = [...BASE_QUESTIONS, ...EXTRA_QUESTIONS];
 import { PLAYABLE_REGIONS, PROVINCES, REGIONS } from '../lib/regions';
 import { EMPTY_PROGRESS, applyResult, discover } from '../lib/progress';
 import { geoArea } from 'd3-geo';
@@ -38,8 +40,13 @@ test('four distinct cells are required while duplicate levels remain allowed', (
 test('every playable region has all 16 unique quiz cells', () => {
   for (const region of PLAYABLE_REGIONS) {
     const questions = QUESTIONS.filter((q) => q.regionCode === region.code);
-    assert.equal(questions.length, 16);
+    assert.ok(questions.length >= 48);
     assert.equal(new Set(questions.map((q) => `${q.category}-${q.level}`)).size, 16);
+    for (const category of CATEGORIES)
+      for (const level of LEVELS)
+        assert.ok(
+          questions.filter((q) => q.category === category.id && q.level === level).length >= 3,
+        );
     questions.forEach((q) => {
       assert.equal(q.choices.length, 4);
       assert.ok(q.answerIndex >= 0 && q.answerIndex < 4);
