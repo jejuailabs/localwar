@@ -19,7 +19,7 @@ export type TimedGateway = GameGateway & {
   discoverRegion?(regionCode: string): Promise<Progress>;
   loadProgress?(): Promise<Progress>;
 };
-async function request<T>(action: string, payload: object): Promise<T> {
+async function rawRequest<T>(action: string, payload: object): Promise<T> {
   const response = await fetch('/api/game', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -29,6 +29,16 @@ async function request<T>(action: string, payload: object): Promise<T> {
   if (!response.ok)
     throw new Error(body.error || '요청을 처리하지 못했습니다. 다시 시도해 주세요.');
   return body;
+}
+// Establish one browser identity before parallel lobby/map requests can set competing cookies.
+let demoIdentity: Promise<unknown> | undefined;
+async function request<T>(action: string, payload: object): Promise<T> {
+  demoIdentity ??= rawRequest<BattleState>('state', {}).catch((error) => {
+    demoIdentity = undefined;
+    throw error;
+  });
+  await demoIdentity;
+  return rawRequest<T>(action, payload);
 }
 const demo: TimedGateway = {
   mode: 'demo',

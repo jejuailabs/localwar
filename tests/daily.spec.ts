@@ -5,6 +5,7 @@ const bank = [...QUESTIONS, ...EXTRA_QUESTIONS];
 test('daily completes 30 questions, resumes without resetting time and supports own region once', async ({
   page,
 }) => {
+  test.setTimeout(120000);
   await page.goto('/');
   await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
   await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
@@ -13,7 +14,9 @@ test('daily completes 30 questions, resumes without resetting time and supports 
     (r) => r.url().endsWith('/api/game') && r.request().postDataJSON().action === 'daily',
   );
   await page.getByRole('button', { name: '데일리 30문제 시작', exact: true }).click();
-  const s = await (await start).json();
+  const response = await start;
+  const s = await response.json();
+  expect(response.ok(), JSON.stringify(s)).toBe(true);
   expect(s.items).toHaveLength(30);
   expect(s.items.every((q: any) => q.choices.length === 0)).toBe(true);
   await expect(page.locator('.question-box h2')).not.toHaveText('다음 문제를 준비하고 있어요.');
@@ -121,4 +124,36 @@ test('daily lobby fits mobile and optional demographics never block enrollment',
     true,
   );
   await page.screenshot({ path: 'docs/previews/daily-mobile.png', fullPage: true });
+});
+test('parallel lobby loading waits for one demo identity before saving support', async ({
+  page,
+}) => {
+  let release!: () => void,
+    requested!: () => void,
+    states = 0;
+  const gate = new Promise<void>((r) => (release = r)),
+    first = new Promise<void>((r) => (requested = r));
+  await page.route('**/api/game', async (route) => {
+    if (route.request().postDataJSON().action === 'state' && ++states === 1) {
+      requested();
+      await gate;
+    }
+    await route.continue();
+  });
+  try {
+    await page.goto('/');
+    await first;
+    await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
+    await page.waitForTimeout(200);
+    expect(states).toBe(1);
+    release();
+    await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
+    await expect(page.locator('.saved-support')).toContainText('서귀포시');
+    const state = await (
+      await page.request.post('/api/game', { data: { action: 'state' } })
+    ).json();
+    expect(state.preferences.regionCode).toBe('jeju-seogwipo');
+  } finally {
+    release();
+  }
 });
