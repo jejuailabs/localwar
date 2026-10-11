@@ -160,6 +160,16 @@ test('an unanswered question expires after 30 seconds and scores zero', async ({
   await expect(page.locator('.answer-feedback')).toContainText('시간 종료!', { timeout: 35000 });
   await expect(page.locator('.score-card h3')).toContainText('0');
   await expect(page.getByRole('button', { name: '다음 지역 이야기로', exact: true })).toBeEnabled();
+  const map = page
+    .getByRole('navigation', { name: '게임 메뉴' })
+    .getByRole('button', { name: '전국 지도', exact: true });
+  await expect(map).toBeEnabled();
+  await map.click();
+  await page
+    .getByRole('dialog', { name: '퀴즈 화면 전환' })
+    .getByRole('button', { name: '메뉴로 이동', exact: true })
+    .click();
+  await expect(page.locator('.province-hit')).toHaveCount(17);
 });
 
 test('small Sejong remains selectable on hover and opens only on click or keyboard', async ({

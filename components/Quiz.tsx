@@ -385,7 +385,8 @@ export function QuizPlay({
   }
   useEffect(() => {
     function keys(e: KeyboardEvent) {
-      if (e.target instanceof HTMLInputElement) return;
+      if (e.target instanceof HTMLInputElement || document.querySelector('[aria-modal="true"]'))
+        return;
       if (['1', '2', '3', '4'].includes(e.key) && !result && deadline) {
         void answer(Number(e.key) - 1);
       }

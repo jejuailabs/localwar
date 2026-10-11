@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -45,6 +45,15 @@ import { backendMode, getGateway, signIn } from '@/lib/gateway';
 import type { BattleState } from '@/packages/shared/conquest';
 import type { GameSession, SessionResult } from '@/packages/shared/game';
 type View = 'daily' | 'map' | 'region' | 'play' | 'result' | 'journal' | 'collection' | 'guide';
+type MenuAction = 'map' | 'daily' | 'journal' | 'collection' | 'guide' | 'login';
+const menuLabels = {
+  map: '전국 지도',
+  daily: '데일리 퀴즈',
+  journal: '나의 원정',
+  collection: '탐험 도감',
+  guide: '플레이 가이드',
+  login: '로그인',
+};
 const BadgeIcons = { compass: Compass, flame: Flame, crown: Crown, map: Map };
 export default function Game() {
   const [view, setView] = useState<View>('map'),
@@ -61,7 +70,39 @@ export default function Game() {
     [anonymous, setAnonymous] = useState(true),
     [dailyPlaying, setDailyPlaying] = useState(false),
     [dailyReview, setDailyReview] = useState<SessionResult | null>(null),
-    [battle, setBattle] = useState<BattleState | null>(null);
+    [battle, setBattle] = useState<BattleState | null>(null),
+    [pendingAction, setPendingAction] = useState<MenuAction | null>(null),
+    [dailyVisit, setDailyVisit] = useState(0);
+  const transitionDialog = useRef<HTMLDivElement>(null);
+  const quizActive = view === 'play' || (view === 'daily' && dailyPlaying);
+  useEffect(() => {
+    if (!pendingAction) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const buttons = transitionDialog.current?.querySelectorAll<HTMLButtonElement>('button');
+    buttons?.[0]?.focus();
+    function keys(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setPendingAction(null);
+      }
+      if (event.key === 'Tab' && buttons?.length) {
+        const first = buttons[0],
+          last = buttons[buttons.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+    window.addEventListener('keydown', keys);
+    return () => {
+      window.removeEventListener('keydown', keys);
+      previous?.focus();
+    };
+  }, [pendingAction]);
   useEffect(() => {
     setProgress(loadProgress());
     if (localStorage.getItem('localwar-daily-active') === 'true') setView('daily');
@@ -129,11 +170,35 @@ export default function Game() {
     if (gained.length) setToast(`새로운 배지 · ${gained.map((b) => b.name).join(', ')}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  function nav(v: View) {
-    if (view === 'play' || dailyPlaying) return;
-    if (v === 'daily') setDailyReview(null);
+  function navigate(v: View) {
+    if (v === 'daily') {
+      setDailyReview(null);
+      if (view === 'daily' && dailyPlaying) {
+        localStorage.setItem('localwar-daily-active', 'false');
+        setDailyVisit((value) => value + 1);
+      }
+    }
+    if (view === 'play') setSession(null);
+    setDailyPlaying(false);
     setView(v);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+  function nav(v: MenuAction) {
+    if (quizActive) {
+      setPendingAction(v);
+      return;
+    }
+    if (v === 'login') void login();
+    else navigate(v);
+  }
+  function confirmTransition() {
+    const action = pendingAction;
+    setPendingAction(null);
+    if (!action) return;
+    if (action === 'login') {
+      navigate('map');
+      void login();
+    } else navigate(action);
   }
   function toggleSound() {
     const value = !sound;
@@ -152,19 +217,28 @@ export default function Game() {
     } catch {}
   }
   async function login() {
-    if (!anonymous) {
-      const m = await import('@/lib/firebase-gateway');
-      await m.logoutPlayer();
-      setToast('게스트 탐험가로 돌아왔어요.');
-      return;
-    }
     setAuthBusy(true);
     try {
-      const user = await signIn();
-      setPlayer(user.name);
-      setToast(`${user.name}님, 원정을 시작해 볼까요?`);
+      if (!anonymous) {
+        const m = await import('@/lib/firebase-gateway');
+        await m.logoutPlayer();
+        setToast('게스트 탐험가로 돌아왔어요.');
+      } else {
+        const user = await signIn();
+        setPlayer(user.name);
+        setToast(`${user.name}님, 원정을 시작해 볼까요?`);
+      }
     } catch (e) {
-      setToast(e instanceof Error ? e.message : '로그인하지 못했습니다.');
+      const code = (e as { code?: string }).code;
+      setToast(
+        code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request'
+          ? '로그인을 취소했어요.'
+          : code === 'auth/popup-blocked'
+            ? '로그인 창이 차단됐어요. 브라우저에서 팝업을 허용한 뒤 다시 눌러주세요.'
+            : e instanceof Error
+              ? e.message
+              : '로그인하지 못했습니다.',
+      );
     } finally {
       setAuthBusy(false);
     }
@@ -174,12 +248,7 @@ export default function Game() {
   return (
     <div className="game-shell">
       <aside className="sidebar">
-        <button
-          className="brand"
-          aria-label="로컬 퀴즈대전 첫 화면"
-          disabled={view === 'play' || dailyPlaying}
-          onClick={() => nav('map')}
-        >
+        <button className="brand" aria-label="로컬 퀴즈대전 첫 화면" onClick={() => nav('map')}>
           <span className="brand-mark">
             <Compass size={25} strokeWidth={1.8} />
           </span>
@@ -211,7 +280,6 @@ export default function Game() {
             return (
               <button
                 key={n.id}
-                disabled={view === 'play' || dailyPlaying}
                 className={
                   view === n.id || (n.id === 'map' && ['region', 'play', 'result'].includes(view))
                     ? 'active'
@@ -307,11 +375,7 @@ export default function Game() {
               </span>
             </div>
             {backendMode === 'firebase' && (
-              <button
-                className="small-button"
-                onClick={() => void login()}
-                disabled={authBusy || dailyPlaying || view === 'play'}
-              >
+              <button className="small-button" onClick={() => nav('login')} disabled={authBusy}>
                 {authBusy ? '로그인 중…' : anonymous ? 'Google 로그인' : '로그아웃'}
               </button>
             )}
@@ -497,7 +561,7 @@ export default function Game() {
           )}
           {view === 'daily' && (
             <DailyQuiz
-              key={`${player}-${anonymous}-${dailyReview?.sessionId || ''}`}
+              key={`${player}-${anonymous}-${dailyReview?.sessionId || ''}-${dailyVisit}`}
               initialResult={dailyReview}
               onPlaying={setDailyPlaying}
               onComplete={(r) => commit(applyResult(progress, r))}
@@ -739,6 +803,44 @@ export default function Game() {
           )}
         </div>
       </main>
+      {pendingAction && (
+        <div className="modal-backdrop">
+          <div
+            ref={transitionDialog}
+            className="confirm-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="퀴즈 화면 전환"
+            aria-describedby="quiz-transition-description"
+          >
+            <Compass size={30} />
+            <h3>
+              {pendingAction === 'login'
+                ? anonymous
+                  ? '로그인하러 갈까요?'
+                  : '로그아웃할까요?'
+                : `${menuLabels[pendingAction]}로 이동할까요?`}
+            </h3>
+            <p id="quiz-transition-description">
+              {dailyPlaying && view === 'daily'
+                ? '제출한 답안은 저장돼요. 같은 계정으로 데일리 퀴즈에 돌아오면 이어할 수 있어요. 시작한 문제의 제한 시간은 계속 흐릅니다.'
+                : '지역 원정은 완료해야 점수가 반영돼요. 시작할 때 사용한 공격 횟수는 복구되지 않습니다.'}
+            </p>
+            <div>
+              <button className="secondary-button" onClick={() => setPendingAction(null)}>
+                계속 도전
+              </button>
+              <button className="primary-button" onClick={confirmTransition}>
+                {pendingAction === 'login'
+                  ? anonymous
+                    ? '로그인 계속하기'
+                    : '로그아웃 계속하기'
+                  : '메뉴로 이동'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {toast && (
         <div className="toast" role="status">
           <Sparkles size={17} />

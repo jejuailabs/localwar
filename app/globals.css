@@ -4419,3 +4419,48 @@ img {
 .featured-photo-credit:hover {
   text-decoration: underline;
 }
+
+/* Keep mobile account actions readable and tappable while a quiz is running. */
+@media (max-width: 600px) {
+  .topbar {
+    min-height: 64px;
+    height: auto;
+    gap: 10px;
+  }
+  .breadcrumb {
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .breadcrumb > span,
+  .breadcrumb > svg {
+    display: none;
+  }
+  .breadcrumb b {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-top {
+    min-width: 0;
+  }
+  .player-top .mode-badge {
+    display: none;
+  }
+  .player-top > div:last-of-type {
+    min-width: 0;
+  }
+  .player-top > div:last-of-type strong {
+    display: block;
+    max-width: 82px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .player-top > .small-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+}

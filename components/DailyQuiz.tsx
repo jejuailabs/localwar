@@ -422,7 +422,7 @@ export default function DailyQuiz({
               ? '전장 연결 중…'
               : state?.dailyDone
                 ? '오늘 성적 다시 보기'
-                : state?.dailySession
+                : state?.dailySession || (!state?.eligible && state?.practiceSession)
                   ? '진행 중인 데일리 이어 하기'
                   : '데일리 30문제 시작'}
             <ArrowRight size={18} />
