@@ -86,6 +86,7 @@ export default function Game() {
         (p) => {
           setPlayer(p.name);
           setAnonymous(p.anonymous);
+          setDailyReview(null);
         },
         (p) => {
           setProgress(p);
@@ -486,7 +487,7 @@ export default function Game() {
           )}
           {view === 'daily' && (
             <DailyQuiz
-              key={`${player}-${dailyReview?.sessionId || ''}`}
+              key={`${player}-${anonymous}-${dailyReview?.sessionId || ''}`}
               initialResult={dailyReview}
               onPlaying={setDailyPlaying}
               onComplete={(r) => commit(applyResult(progress, r))}
@@ -494,7 +495,7 @@ export default function Game() {
           )}
           {view === 'region' && (
             <RegionChallenge
-              key={region.code}
+              key={`${region.code}-${player}-${anonymous}`}
               region={region}
               occupation={progress.territory[region.code] || 32}
               onClose={() => nav('map')}

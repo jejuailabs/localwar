@@ -157,3 +157,20 @@ test('parallel lobby loading waits for one demo identity before saving support',
     release();
   }
 });
+test('mobile daily starts and advances at the top of each question', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
+  await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
+  await expect(page.locator('.saved-support')).toContainText('서귀포시');
+  await page.getByRole('button', { name: '데일리 30문제 시작', exact: true }).click();
+  await expect(page.locator('.answer-options button').first()).toBeEnabled();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
+    true,
+  );
+  await page.getByRole('button', { name: /^보기 1:/ }).click();
+  await page.getByRole('button', { name: '다음 지역 이야기로', exact: true }).click();
+  await expect(page.locator('.answer-options button').first()).toBeEnabled();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});

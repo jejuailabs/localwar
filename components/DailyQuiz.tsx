@@ -141,6 +141,7 @@ export default function DailyQuiz({
   }, []);
   function playing(s: GameSession | null) {
     setSession(s);
+    window.scrollTo({ top: 0, behavior: 'auto' });
     onPlaying(!!s);
     try {
       localStorage.setItem('localwar-daily-active', String(!!s));

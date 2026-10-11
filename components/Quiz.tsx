@@ -355,6 +355,7 @@ export function QuizPlay({
   async function next() {
     if (index < session.items.length - 1) {
       setIndex(index + 1);
+      window.scrollTo({ top: 0, behavior: 'auto' });
       return;
     }
     setBusy(true);
