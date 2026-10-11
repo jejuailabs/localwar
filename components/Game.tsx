@@ -27,6 +27,7 @@ import {
   VolumeX,
   X,
 } from 'lucide-react';
+import DailyQuiz, { BattleSummary } from './DailyQuiz';
 import BattleMap from './BattleMap';
 import { ExpeditionResult, QuizPlay, RegionChallenge } from './Quiz';
 import { PLAYABLE_REGIONS, REGIONS, regionByCode, type Region } from '@/lib/regions';
@@ -40,8 +41,9 @@ import {
   type Progress,
 } from '@/lib/progress';
 import { backendMode, getGateway, signIn } from '@/lib/gateway';
+import type { BattleState } from '@/packages/shared/conquest';
 import type { GameSession, SessionResult } from '@/packages/shared/game';
-type View = 'map' | 'region' | 'play' | 'result' | 'journal' | 'collection' | 'guide';
+type View = 'daily' | 'map' | 'region' | 'play' | 'result' | 'journal' | 'collection' | 'guide';
 const BadgeIcons = { compass: Compass, flame: Flame, crown: Crown, map: Map };
 export default function Game() {
   const [view, setView] = useState<View>('map'),
@@ -55,9 +57,13 @@ export default function Game() {
     [toast, setToast] = useState(''),
     [player, setPlayer] = useState('새로운 탐험가'),
     [authBusy, setAuthBusy] = useState(false),
-    [anonymous, setAnonymous] = useState(true);
+    [anonymous, setAnonymous] = useState(true),
+    [dailyPlaying, setDailyPlaying] = useState(false),
+    [dailyReview, setDailyReview] = useState<SessionResult | null>(null),
+    [battle, setBattle] = useState<BattleState | null>(null);
   useEffect(() => {
     setProgress(loadProgress());
+    if (localStorage.getItem('localwar-daily-active') === 'true') setView('daily');
     try {
       setSound(localStorage.getItem('localwar-sound') === 'true');
       const theme = localStorage.getItem('localwar-theme') === 'light';
@@ -122,7 +128,8 @@ export default function Game() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function nav(v: View) {
-    if (view === 'play') return;
+    if (view === 'play' || dailyPlaying) return;
+    if (v === 'daily') setDailyReview(null);
     setView(v);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -168,7 +175,7 @@ export default function Game() {
         <button
           className="brand"
           aria-label="로컬 퀴즈대전 첫 화면"
-          disabled={view === 'play'}
+          disabled={view === 'play' || dailyPlaying}
           onClick={() => nav('map')}
         >
           <span className="brand-mark">
@@ -192,6 +199,7 @@ export default function Game() {
           {(
             [
               { id: 'map', label: '전국 지도', icon: Map },
+              { id: 'daily', label: '데일리 퀴즈', icon: Swords },
               { id: 'journal', label: '나의 원정', icon: Route },
               { id: 'collection', label: '탐험 도감', icon: BookOpen },
               { id: 'guide', label: '플레이 가이드', icon: HelpCircle },
@@ -201,7 +209,7 @@ export default function Game() {
             return (
               <button
                 key={n.id}
-                disabled={view === 'play'}
+                disabled={view === 'play' || dailyPlaying}
                 className={
                   view === n.id || (n.id === 'map' && ['region', 'play', 'result'].includes(view))
                     ? 'active'
@@ -270,13 +278,15 @@ export default function Game() {
             <b>
               {view === 'map'
                 ? '전국 지도'
-                : view === 'journal'
-                  ? '나의 원정'
-                  : view === 'collection'
-                    ? '탐험 도감'
-                    : view === 'guide'
-                      ? '플레이 가이드'
-                      : region.name}
+                : view === 'daily'
+                  ? '데일리 퀴즈'
+                  : view === 'journal'
+                    ? '나의 원정'
+                    : view === 'collection'
+                      ? '탐험 도감'
+                      : view === 'guide'
+                        ? '플레이 가이드'
+                        : region.name}
             </b>
           </div>
           <div className="player-top">
@@ -295,7 +305,11 @@ export default function Game() {
               </span>
             </div>
             {backendMode === 'firebase' && (
-              <button className="small-button" onClick={() => void login()} disabled={authBusy}>
+              <button
+                className="small-button"
+                onClick={() => void login()}
+                disabled={authBusy || dailyPlaying || view === 'play'}
+              >
                 {authBusy ? '로그인 중…' : anonymous ? 'Google 로그인' : '로그아웃'}
               </button>
             )}
@@ -324,11 +338,13 @@ export default function Game() {
                   <ArrowUpRight size={16} />
                 </button>
               </section>
+              <BattleSummary onDaily={() => nav('daily')} onState={setBattle} />
               <div className="dashboard-layout">
                 <BattleMap
                   onRegion={openRegion}
                   discovered={progress.discovered}
                   territory={progress.territory}
+                  standings={battle?.standings || []}
                 />
                 <aside className="dashboard-side">
                   <section className="featured-expedition">
@@ -468,6 +484,14 @@ export default function Game() {
               </footer>
             </>
           )}
+          {view === 'daily' && (
+            <DailyQuiz
+              key={`${player}-${dailyReview?.sessionId || ''}`}
+              initialResult={dailyReview}
+              onPlaying={setDailyPlaying}
+              onComplete={(r) => commit(applyResult(progress, r))}
+            />
+          )}
           {view === 'region' && (
             <RegionChallenge
               key={region.code}
@@ -532,7 +556,7 @@ export default function Game() {
                 <div>
                   <Flag size={26} />
                   <b>{progress.wins}</b>
-                  <span>3문제 이상 정답 원정</span>
+                  <span>정답률 75% 이상 원정</span>
                 </div>
               </div>
               {progress.results.length ? (
@@ -541,6 +565,11 @@ export default function Game() {
                     <button
                       key={r.sessionId}
                       onClick={() => {
+                        if (r.mode === 'daily') {
+                          setDailyReview(r);
+                          setView('daily');
+                          return;
+                        }
                         setRegion(regionByCode(r.regionCode)!);
                         setBefore(
                           Math.max(0, (progress.territory[r.regionCode] || 32) - r.contribution),
@@ -553,9 +582,12 @@ export default function Game() {
                         <Flag size={21} />
                       </span>
                       <span>
-                        <b>{regionByCode(r.regionCode)?.name}</b>
+                        <b>
+                          {r.mode === 'daily' ? '데일리 퀴즈 · ' : ''}
+                          {regionByCode(r.regionCode)?.name}
+                        </b>
                         <small>
-                          {r.correctCount}/4 정답 · {r.bestCombo} 콤보
+                          {r.correctCount}/{r.items.length || 4} 정답 · {r.bestCombo} 콤보
                         </small>
                       </span>
                       <strong>

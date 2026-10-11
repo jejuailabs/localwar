@@ -451,6 +451,17 @@ const jongno: Seed[] = [
 function materialize(regionCode: string, seeds: Seed[]): Question[] {
   return seeds.map(([category, level, prompt, choices, answerIndex, explanation, source]) => ({
     id: `${regionCode}-${category}-${level}`,
+    factId:
+      (
+        {
+          'seoul-jongno-food-1': 'jongno-bindaetteok-mungbean',
+          'seoul-jongno-food-3': 'jongno-bindaetteok-mungbean',
+          'chungbuk-chungju-people-1': 'chungju-ureuk-gayageum',
+          'chungbuk-chungju-people-2': 'chungju-ureuk-gayageum',
+          'jeju-seogwipo-history-1': 'jeju-seongsan-water-volcano',
+          'jeju-seogwipo-travel-4': 'jeju-seongsan-water-volcano',
+        } as Record<string, string>
+      )[`${regionCode}-${category}-${level}`] || `${regionCode}-${category}-${level}`,
     regionCode,
     category,
     level,

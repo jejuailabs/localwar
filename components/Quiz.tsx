@@ -25,6 +25,7 @@ import {
   CATEGORIES,
   LEVELS,
   BASE_POINTS,
+  type PublicQuestion,
   type Pick,
   type GameSession,
   type AnswerResult,
@@ -32,6 +33,7 @@ import {
 } from '@/packages/shared/game';
 import type { Region } from '@/lib/regions';
 import { getGateway } from '@/lib/gateway';
+import type { BattleState } from '@/packages/shared/conquest';
 import { REGION_ART } from '@/lib/art';
 import { playSound } from '@/lib/sound';
 const Icons = { landmark: Landmark, users: Users, utensils: Utensils, compass: Compass };
@@ -49,6 +51,13 @@ export function RegionChallenge({
   const [picks, setPicks] = useState<Pick[]>([]),
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
+  const [battle, setBattle] = useState<BattleState | null>(null);
+  useEffect(() => {
+    void getGateway()
+      .then((g) => g.battleState())
+      .then(setBattle)
+      .catch(() => {});
+  }, []);
   const max = picks.reduce((sum, p) => sum + BASE_POINTS[p.level], 0);
   async function start() {
     setBusy(true);
@@ -96,6 +105,14 @@ export function RegionChallenge({
             <i style={{ width: `${occupation}%` }} />
           </div>
           <p>정답을 맞힐수록 내 깃발이 가까워집니다.</p>
+          {battle && (
+            <p>
+              오늘 점령 지수{' '}
+              {battle.standings.find((s) => s.regionCode === region.code)?.total.toFixed(2) ||
+                '0.00'}{' '}
+              · 공격 90% + 데일리 10%
+            </p>
+          )}
         </div>
         <div className="rule-stack">
           <div>
@@ -131,6 +148,14 @@ export function RegionChallenge({
             <span className="eyebrow">BUILD YOUR CHALLENGE</span>
             <h2>어떤 지식으로 도전할까요?</h2>
             <p>16칸 중 4칸을 골라 나만의 원정을 만드세요.</p>
+            {battle && (
+              <p className="daily-attack-status">
+                {battle.eligible
+                  ? `오늘 공격권 ${Math.max(0, 3 - battle.attackUsed)}/3 · 소진 후 연습`
+                  : '게스트 연습 · 로그인하면 일일 점령전 참여'}{' '}
+                · 매일 00:00 갱신
+              </p>
+            )}
           </div>
           <span className="pick-counter">
             <b>{picks.length}</b> / 4
@@ -256,25 +281,31 @@ export function QuizPlay({
   onFinish: (r: SessionResult) => void;
   onLeave: () => void;
 }) {
-  const [index, setIndex] = useState(0),
+  const [index, setIndex] = useState(
+      Math.min(session.answers?.length || 0, session.items.length - 1),
+    ),
+    [currentItem, setCurrentItem] = useState<PublicQuestion | null>(null),
     [deadline, setDeadline] = useState<number | null>(null),
     [remaining, setRemaining] = useState(30),
     [result, setResult] = useState<AnswerResult | null>(null),
     [selected, setSelected] = useState<number | null>(null),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
-    [total, setTotal] = useState(0),
-    [combo, setCombo] = useState(0),
+    [total, setTotal] = useState((session.answers || []).reduce((n, a) => n + a.score, 0)),
+    [combo, setCombo] = useState(
+      (session.answers || []).reduce((n, a) => (a.correct ? n + 1 : 0), 0),
+    ),
     [confirmLeave, setConfirmLeave] = useState(false);
   const locked = useRef(false);
-  const answers = useRef<AnswerResult[]>([]);
-  const item = session.items[index];
+  const answers = useRef<AnswerResult[]>(session.answers || []);
+  const item = currentItem || session.items[index];
   const category = CATEGORIES.find((c) => c.id === item.category)!;
   async function begin() {
     setError('');
     try {
       const gateway = await getGateway();
       const timing = await gateway.beginQuestion(session.sessionId, index);
+      setCurrentItem(timing.item || session.items[index]);
       setDeadline(timing.deadline);
       setRemaining(Math.max(0, (timing.deadline - Date.now()) / 1000));
     } catch (e) {
@@ -283,6 +314,7 @@ export function QuizPlay({
   }
   useEffect(() => {
     locked.current = false;
+    setCurrentItem(null);
     setDeadline(null);
     setResult(null);
     setSelected(null);
@@ -321,7 +353,7 @@ export function QuizPlay({
     return () => clearInterval(timer);
   }, [deadline, result, index]);
   async function next() {
-    if (index < 3) {
+    if (index < session.items.length - 1) {
       setIndex(index + 1);
       return;
     }
@@ -353,7 +385,9 @@ export function QuizPlay({
       <div className="play-breadcrumb">
         <span>
           <MapPin size={15} />
-          {region.province} / {region.name}
+          {session.mode === 'daily'
+            ? '데일리 퀴즈 · 전국 30문제'
+            : `${region.province} / ${region.name}`}
           <b>원정 중</b>
         </span>
         <button className="text-button" onClick={() => setConfirmLeave(true)}>
@@ -363,7 +397,7 @@ export function QuizPlay({
       </div>
       <div className="play-layout">
         <div className="play-main">
-          <div className="question-progress">
+          <div className={`question-progress ${session.mode === 'daily' ? 'daily-progress' : ''}`}>
             {session.items.map((q, i) => (
               <div className={i === index ? 'current' : i < index ? 'completed' : ''} key={q.id}>
                 <span>
@@ -374,7 +408,7 @@ export function QuizPlay({
                       <X size={15} />
                     )
                   ) : (
-                    `0${i + 1}`
+                    String(i + 1).padStart(2, '0')
                   )}
                 </span>
                 <p>
@@ -451,7 +485,11 @@ export function QuizPlay({
                 disabled={busy}
                 onClick={() => void next()}
               >
-                {busy ? '결과 집계 중…' : index === 3 ? '원정 결과 확인' : '다음 지역 이야기로'}
+                {busy
+                  ? '결과 집계 중…'
+                  : index === session.items.length - 1
+                    ? '원정 결과 확인'
+                    : '다음 지역 이야기로'}
                 <ArrowRight size={18} />
               </button>
             ) : (
@@ -477,7 +515,9 @@ export function QuizPlay({
                 ? '다음 이야기로 떠날 준비 완료'
                 : remaining <= 5
                   ? '집중! 마지막 기회를 잡으세요.'
-                  : '빠르게 맞히면 최대 1.2배!'}
+                  : session.mode === 'daily'
+                    ? '정확하게 맞히고 속도율을 높이세요!'
+                    : '빠르게 맞히면 최대 1.2배!'}
             </p>
           </div>
           <div className="score-card">
@@ -508,7 +548,10 @@ export function QuizPlay({
           <div className="confirm-dialog" role="dialog" aria-modal="true" aria-label="원정 나가기">
             <Flag size={30} />
             <h3>이 원정을 마칠까요?</h3>
-            <p>완료하지 않은 원정의 점수는 저장되지 않습니다.</p>
+            <p>
+              데일리는 이어서 도전할 수 있어요. 지역 공격권은 시작할 때 사용되며, 완료해야 점수가
+              반영됩니다.
+            </p>
             <div>
               <button className="secondary-button" onClick={() => setConfirmLeave(false)}>
                 계속 도전
@@ -536,7 +579,7 @@ export function ExpeditionResult({
   onMap: () => void;
   onRetry: () => void;
 }) {
-  const perfect = result.correctCount === 4;
+  const perfect = result.correctCount === result.items.length;
   const after = Math.min(100, before + result.contribution);
   return (
     <section className="result-screen">
@@ -574,7 +617,9 @@ export function ExpeditionResult({
         <div className="result-stats">
           <div>
             <CheckCircle2 size={19} />
-            <b>{result.correctCount}/4</b>
+            <b>
+              {result.correctCount}/{result.items.length}
+            </b>
             <span>정답</span>
           </div>
           <div>

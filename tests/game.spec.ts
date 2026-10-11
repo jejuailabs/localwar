@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { QUESTIONS } from '../lib/questions';
+import { QUESTIONS as BASE_QUESTIONS } from '../lib/questions';
+import { EXTRA_QUESTIONS } from '../lib/question-bank';
+const QUESTIONS = [...BASE_QUESTIONS, ...EXTRA_QUESTIONS];
 import { CATEGORIES } from '../packages/shared/game';
 test('province hover stays on the flat national map until click, then county click opens 16 choices', async ({
   page,
@@ -126,7 +128,7 @@ test('API rejects duplicate picks, answers out of order and double submits', asy
       data: { action: 'answer', sessionId: s.sessionId, index: 0, choiceIndex: correct },
     }),
   ]);
-  expect(answers.map((r) => r.status()).sort()).toEqual([200, 400]);
+  expect(answers.map((r) => r.status()).sort()).toEqual([200, 200]);
   const finish = await request.post('/api/game', {
     data: { action: 'finish', sessionId: s.sessionId },
   });

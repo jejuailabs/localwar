@@ -3986,3 +3986,342 @@ img {
   line-height: 1.9;
   color: var(--muted);
 }
+.daily-hero {
+  padding: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: radial-gradient(ellipse at 90% 35%, #21494577, transparent 65%), var(--surface);
+  border-radius: 18px;
+  margin-bottom: 24px;
+}
+.daily-hero h1 {
+  font-size: 42px;
+  line-height: 1.35;
+  margin: 16px 0;
+}
+.daily-hero em {
+  color: var(--gold);
+  font-style: normal;
+}
+.daily-hero p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+.daily-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+.daily-chips span {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+}
+.daily-orbit {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 1px solid #eebc7066;
+  outline: 12px solid #eebc7008;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px #71dece15;
+}
+.daily-orbit b {
+  font-size: 72px;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.daily-orbit span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin: 8px 0 16px;
+}
+.daily-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 24px;
+}
+.daily-config,
+.daily-support-card {
+  padding: 26px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 14px;
+}
+.daily-config h2 {
+  font-size: 20px;
+}
+.daily-levels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 30px;
+}
+.daily-levels button {
+  padding: 18px 8px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  background: transparent;
+}
+.daily-levels button.selected {
+  border-color: var(--gold);
+  background: #eebc7012;
+}
+.daily-levels small,
+.daily-levels span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.daily-levels b {
+  font-size: 13px;
+}
+.support-profile {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.support-profile p,
+.daily-support-card p,
+.daily-config > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.profile-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.profile-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+.profile-fields select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 12px;
+  width: 100%;
+}
+.profile-fields option {
+  background: #14242d;
+  color: #fff;
+}
+.daily-start {
+  width: 100%;
+  margin: 20px 0 8px;
+}
+.support-big {
+  font-size: 50px;
+  color: var(--gold);
+  margin: 28px 0;
+}
+.support-big small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.daily-support-card h2 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.daily-support-card hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+.support-split {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: #142f3266;
+}
+.support-split i {
+  height: 7px;
+  background: var(--gold);
+}
+.support-split i:last-child {
+  background: #71dece;
+}
+.daily-progress {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 6px;
+}
+.daily-progress > div {
+  min-width: 0;
+  padding: 7px 0;
+}
+.daily-progress p {
+  display: none;
+}
+.daily-result {
+  text-align: center;
+  max-width: 950px;
+  margin: auto;
+}
+.daily-result h1 {
+  font-size: 38px;
+  margin: 16px 0;
+}
+.daily-emblem {
+  margin: 20px auto;
+  display: flex;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+  background: #eebc7012;
+  color: var(--gold);
+}
+.daily-result > .eyebrow {
+  display: block;
+}
+.daily-result > p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+.daily-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 30px 0;
+  gap: 16px;
+}
+.daily-metrics div {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+.daily-metrics b {
+  font-size: 30px;
+  color: var(--gold);
+}
+.daily-metrics span {
+  font-size: 12px;
+}
+.daily-result .answer-review {
+  text-align: left;
+  margin-top: 35px;
+}
+.battle-summary {
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: var(--surface);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+.battle-summary h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+.battle-summary p {
+  font-size: 11px;
+  color: var(--muted);
+}
+.battle-leaders {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.battle-leaders > span {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px 8px;
+  font-size: 12px;
+}
+.battle-leaders b {
+  color: var(--gold);
+}
+.battle-leaders small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 10px;
+}
+.battle-summary button {
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .daily-columns {
+    grid-template-columns: 1fr;
+  }
+  .battle-summary {
+    flex-wrap: wrap;
+  }
+  .daily-hero h1 {
+    font-size: 34px;
+  }
+  .daily-orbit {
+    width: 130px;
+    height: 130px;
+  }
+  .daily-orbit b {
+    font-size: 52px;
+  }
+}
+@media (max-width: 540px) {
+  .daily-hero {
+    padding: 24px;
+  }
+  .daily-orbit {
+    display: none;
+  }
+  .daily-hero h1 {
+    font-size: 30px;
+  }
+  .daily-config,
+  .daily-support-card {
+    padding: 20px;
+  }
+  .daily-levels {
+    grid-template-columns: 1fr 1fr;
+  }
+  .daily-metrics {
+    gap: 6px;
+  }
+  .daily-metrics div {
+    padding: 15px 5px;
+  }
+  .daily-metrics b {
+    font-size: 23px;
+  }
+  .daily-metrics span {
+    font-size: 10px;
+  }
+  .daily-progress {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+  .battle-summary {
+    padding: 18px;
+  }
+  .battle-summary button {
+    width: 100%;
+  }
+}

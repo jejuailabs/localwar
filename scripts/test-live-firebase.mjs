@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import { QUESTIONS } from '../functions/lib/questions.js';
+import { QUESTIONS as BASE_QUESTIONS } from '../functions/lib/questions.js';
+import { EXTRA_QUESTIONS } from '../functions/lib/question-bank.js';
+const QUESTIONS = [...BASE_QUESTIONS, ...EXTRA_QUESTIONS];
 process.loadEnvFile('.env.local');
 const project = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 assert.equal(project, 'test-e27db');
@@ -100,9 +102,56 @@ try {
     { headers: { Authorization: `Bearer ${user.idToken}` } },
   );
   assert.equal(sessionRead.status, 403);
+  await call(
+    'localwarSavePreferences',
+    { regionCode: 'jeju-seogwipo', gender: 'unspecified', age: 'unspecified' },
+    user,
+  );
+  const daily = (await call('localwarStartDaily', { level: 4 }, user)).result;
+  assert.ok(daily);
+  sessions.push({ id: daily.sessionId, uid: user.localId });
+  assert.equal(daily.competitive, false);
+  assert.equal(daily.items.length, 30);
+  assert.ok(
+    daily.items.every((q) => q.choices.length === 0 && !('factId' in q) && !('alternatives' in q)),
+  );
+  const first = (
+    await call('localwarBeginQuestion', { sessionId: daily.sessionId, index: 0 }, user)
+  ).result;
+  const resume = (await call('localwarStartDaily', { level: 1 }, user)).result;
+  assert.equal(resume.sessionId, daily.sessionId);
+  assert.equal(
+    (await call('localwarBeginQuestion', { sessionId: daily.sessionId, index: 0 }, user)).result
+      .deadline,
+    first.deadline,
+  );
+  for (let index = 0; index < 30; index++) {
+    const begin = (await call('localwarBeginQuestion', { sessionId: daily.sessionId, index }, user))
+      .result;
+    const source = QUESTIONS.find((q) => q.id === begin.item.id);
+    const choiceIndex = begin.item.choices.indexOf(source.choices[source.answerIndex]);
+    const answer = (
+      await call('localwarSubmitAnswer', { sessionId: daily.sessionId, index, choiceIndex }, user)
+    ).result;
+    assert.equal(answer.correct, true);
+  }
+  const dailyResult = (await call('localwarFinishSession', { sessionId: daily.sessionId }, user))
+    .result;
+  assert.equal(dailyResult.correctCount, 30);
+  assert.equal(dailyResult.daily.accuracy, 100);
+  assert.equal(dailyResult.daily.support, 0);
+  assert.deepEqual(
+    (await call('localwarFinishSession', { sessionId: daily.sessionId }, user)).result,
+    dailyResult,
+  );
+  const battle = (await call('localwarBattleState', {}, user)).result;
+  assert.equal(battle.eligible, false);
+  assert.ok(battle.standings.every((row) => !('groups' in row)));
+
   console.log(
     JSON.stringify({
       liveFirebase: 'passed',
+      daily: '30/30 correct, resumed, idempotent, guest practice',
       score: result.totalScore,
       correctCount: result.correctCount,
       bestCombo: result.bestCombo,

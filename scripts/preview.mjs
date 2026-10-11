@@ -35,5 +35,12 @@ await page.screenshot({ path: 'docs/previews/chungju-hover.png', fullPage: true 
 await page.getByRole('button', { name: '충주시 퀴즈 선택', exact: true }).click();
 await page.waitForTimeout(400);
 await page.screenshot({ path: 'docs/previews/quiz-selection.png', fullPage: true });
-console.log(JSON.stringify({ errors, selection: await page.locator('.quiz-pick').count() }));
+await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
+await page.getByRole('heading', { name: '오늘은 어느 난이도로?', exact: true }).waitFor();
+await page.waitForTimeout(4500);
+await page.screenshot({ path: 'docs/previews/daily-desktop.png', fullPage: true });
+await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
+await page.locator('.saved-support').waitFor();
+await page.screenshot({ path: 'docs/previews/daily-ready.png', fullPage: true });
+console.log(JSON.stringify({ errors, daily: await page.locator('.daily-lobby').count() }));
 await browser.close();

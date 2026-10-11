@@ -8,6 +8,9 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.uid == userId;
       allow write: if false;
     }
+    match /localwarDays/{day}/{document=**} {
+      allow read, write: if false;
+    }
     match /localwarSessions/{sessionId} {
       allow read, write: if false;
     }

@@ -9,6 +9,15 @@ import {
   type SessionResult,
 } from './shared/game.js';
 export function shuffle(q: Question): Question {
+  const answer = q.choices[q.answerIndex];
+  const wrong = [
+    ...new Set([...q.choices.filter((_, i) => i !== q.answerIndex), ...(q.alternatives || [])]),
+  ].filter((c) => c !== answer);
+  for (let i = wrong.length - 1; i > 0; i--) {
+    const j = randomInt(i + 1);
+    [wrong[i], wrong[j]] = [wrong[j], wrong[i]];
+  }
+  q = { ...q, choices: [answer, ...wrong.slice(0, 3)], answerIndex: 0 };
   const order = [0, 1, 2, 3];
   for (let i = 3; i > 0; i--) {
     const j = randomInt(i + 1);
@@ -21,7 +30,7 @@ export function shuffle(q: Question): Question {
   };
 }
 export function publicItems(questions: Question[]) {
-  return questions.map(({ answerIndex, explanation, source, ...q }) => ({
+  return questions.map(({ answerIndex, explanation, source, alternatives, factId, ...q }) => ({
     ...q,
     timeLimitSec: TIME_LIMIT,
   }));
@@ -36,6 +45,7 @@ export function grade(
   const timedOut = elapsed >= TIME_LIMIT;
   const correct = !timedOut && choiceIndex === q.answerIndex;
   return {
+    elapsedSec: Math.min(30, elapsed),
     correct,
     answerIndex: q.answerIndex,
     explanation: q.explanation,

@@ -1,3 +1,5 @@
+import type { BattleState, Preferences } from '@/packages/shared/conquest';
+import type { PublicQuestion, Level } from '@/packages/shared/game';
 import type { Progress } from './progress';
 import type {
   GameGateway,
@@ -7,7 +9,13 @@ import type {
   SessionResult,
 } from '@/packages/shared/game';
 export type TimedGateway = GameGateway & {
-  beginQuestion(sessionId: string, index: number): Promise<{ deadline: number }>;
+  beginQuestion(
+    sessionId: string,
+    index: number,
+  ): Promise<{ deadline: number; item?: PublicQuestion }>;
+  battleState(): Promise<BattleState>;
+  savePreferences(preferences: Preferences): Promise<unknown>;
+  startDaily(level: Level, practice?: boolean): Promise<GameSession>;
   discoverRegion?(regionCode: string): Promise<Progress>;
   loadProgress?(): Promise<Progress>;
 };
@@ -24,6 +32,9 @@ async function request<T>(action: string, payload: object): Promise<T> {
 }
 const demo: TimedGateway = {
   mode: 'demo',
+  battleState: () => request('state', {}),
+  savePreferences: (preferences) => request('preferences', preferences),
+  startDaily: (level, practice = false) => request('daily', { level, practice }),
   startSession: (regionCode, picks) => request<GameSession>('start', { regionCode, picks }),
   beginQuestion: (sessionId, index) => request('begin', { sessionId, index }),
   submitAnswer: (sessionId, index, choiceIndex) =>

@@ -82,6 +82,9 @@ export async function createFirebaseGateway(): Promise<TimedGateway> {
   }
   return {
     mode: 'firebase',
+    battleState: () => call('localwarBattleState', {}),
+    savePreferences: (preferences) => call('localwarSavePreferences', preferences),
+    startDaily: (level, practice = false) => call('localwarStartDaily', { level, practice }),
     startSession: (regionCode, picks) =>
       call<GameSession>('localwarStartSession', { regionCode, picks }),
     beginQuestion: (sessionId, index) => call('localwarBeginQuestion', { sessionId, index }),

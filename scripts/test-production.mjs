@@ -1,6 +1,8 @@
 import { chromium } from '@playwright/test';
 import { browserExecutable } from './browser-options.mjs';
-import { QUESTIONS } from '../functions/lib/questions.js';
+import { QUESTIONS as BASE_QUESTIONS } from '../functions/lib/questions.js';
+import { EXTRA_QUESTIONS } from '../functions/lib/question-bank.js';
+const QUESTIONS = [...BASE_QUESTIONS, ...EXTRA_QUESTIONS];
 import { createRequire } from 'node:module';
 import assert from 'node:assert/strict';
 process.loadEnvFile('.env.local');
@@ -27,7 +29,10 @@ page.on('response', async (r) => {
     const u = await r.json();
     if (u.idToken) users.push(u);
   }
-  if (r.url().endsWith('/localwarStartSession') && r.ok()) {
+  if (
+    (r.url().endsWith('/localwarStartSession') || r.url().endsWith('/localwarStartDaily')) &&
+    r.ok()
+  ) {
     const body = await r.json();
     if (body.result?.sessionId) sessions.push(body.result.sessionId);
   }
@@ -102,6 +107,41 @@ try {
   await page.getByRole('button', { name: '나의 원정', exact: true }).click();
   await page.locator('.journal-list button').waitFor({ timeout: 15000 });
   assert.equal(await page.locator('.journal-list button').count(), 1);
+  await page.getByRole('button', { name: '데일리 퀴즈', exact: true }).first().click();
+  await page.getByRole('heading', { name: '오늘은 어느 난이도로?', exact: true }).waitFor();
+  await page.getByRole('button', { name: '지원 정보 저장', exact: true }).click();
+  await page.locator('.saved-support').waitFor();
+  await page.locator('.daily-levels button').nth(3).click();
+  await page.getByRole('button', { name: '데일리 30문제 시작', exact: true }).click();
+  for (let i = 0; i < 30; i++) {
+    await page.waitForFunction(
+      () =>
+        document.querySelectorAll('.answer-options button').length === 4 &&
+        !document.querySelector('.answer-options button').disabled,
+    );
+    const prompt = await page.locator('.question-box h2').textContent();
+    const source = QUESTIONS.find((q) => q.prompt === prompt);
+    assert.ok(source);
+    const correct = source.choices[source.answerIndex];
+    const escaped = correct.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    await page.getByRole('button', { name: new RegExp(`^보기 [1-4]: ${escaped}$`) }).click();
+    await page.locator('.answer-feedback.success').waitFor({ timeout: 20000 });
+    await page
+      .getByRole('button', {
+        name: i === 29 ? '원정 결과 확인' : '다음 지역 이야기로',
+        exact: true,
+      })
+      .click();
+  }
+  await page
+    .getByRole('heading', { name: '전국 지식왕!', exact: true })
+    .waitFor({ timeout: 20000 });
+  assert.ok((await page.locator('.daily-metrics').textContent()).includes('30/30'));
+  await page.getByRole('button', { name: '나의 원정', exact: true }).click();
+  assert.equal(await page.locator('.journal-list button').count(), 2);
+  await page.locator('.journal-list button').filter({ hasText: '데일리 퀴즈' }).click();
+  await page.getByRole('heading', { name: '전국 지식왕!', exact: true }).waitFor();
+
   assert.deepEqual(errors, []);
   console.log(
     JSON.stringify({
@@ -111,6 +151,7 @@ try {
       map: 'flat initial, hover only lifts, Sejong click opens counties',
       questionSource: 'Cloud Functions',
       expedition: '4/4 correct',
+      daily: '30/30 correct, guest practice, history review',
       recordAfterReload: true,
       consoleErrors: errors.length,
     }),

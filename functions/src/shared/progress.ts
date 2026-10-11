@@ -48,16 +48,22 @@ export function discover(p: Progress, code: string): Progress {
 export function applyResult(p: Progress, r: SessionResult): Progress {
   if (p.results.some((v) => v.sessionId === r.sessionId)) return p;
   const badges = [...p.badges];
-  if (r.correctCount === 4) badges.push('perfect');
+  if (r.correctCount === (r.items.length || 4)) badges.push('perfect');
   if (r.bestCombo >= 3) badges.push('combo');
-  if (new Set([...p.visited, r.regionCode]).size >= 3) badges.push('explorer');
+  if (r.mode !== 'daily' && new Set([...p.visited, r.regionCode]).size >= 3)
+    badges.push('explorer');
   return {
     ...p,
-    visited: [...new Set([...p.visited, r.regionCode])],
-    xp: p.xp + r.totalScore,
-    wins: p.wins + (r.correctCount >= 3 ? 1 : 0),
+    visited: r.mode === 'daily' ? p.visited : [...new Set([...p.visited, r.regionCode])],
+    xp: p.xp + (r.mode === 'daily' ? Math.round((r.daily?.performance || 0) * 5) : r.totalScore),
+    wins: p.wins + (r.correctCount >= (r.items.length || 4) * 0.75 ? 1 : 0),
     bestScore: Math.max(p.bestScore, r.totalScore),
-    results: [r, ...p.results].slice(0, 20),
+    results: [r, ...p.results]
+      .filter(
+        (v, i, all) =>
+          v.mode !== 'daily' || all.slice(0, i + 1).filter((a) => a.mode === 'daily').length <= 3,
+      )
+      .slice(0, 20),
     badges: [...new Set(badges)],
     territory: {
       ...p.territory,
@@ -68,6 +74,6 @@ export function applyResult(p: Progress, r: SessionResult): Progress {
 export const BADGES = [
   { id: 'first-step', name: '첫 발걸음', description: '첫 지역을 발견하기', symbol: 'compass' },
   { id: 'combo', name: '지식의 불꽃', description: '3문제 연속 정답', symbol: 'flame' },
-  { id: 'perfect', name: '완벽한 원정', description: '4문제 모두 정답', symbol: 'crown' },
+  { id: 'perfect', name: '완벽한 원정', description: '한 원정의 모든 문제 정답', symbol: 'crown' },
   { id: 'explorer', name: '전국 탐험가', description: '3개 지역 원정 완료', symbol: 'map' },
 ];

@@ -2,6 +2,8 @@ export type Category = 'history' | 'people' | 'food' | 'travel';
 export type Level = 1 | 2 | 3 | 4;
 export type Pick = { category: Category; level: Level };
 export type Question = Pick & {
+  factId?: string;
+  alternatives?: string[];
   id: string;
   regionCode: string;
   prompt: string;
@@ -10,10 +12,14 @@ export type Question = Pick & {
   explanation: string;
   source: string;
 };
-export type PublicQuestion = Omit<Question, 'answerIndex' | 'explanation' | 'source'> & {
+export type PublicQuestion = Omit<
+  Question,
+  'answerIndex' | 'explanation' | 'source' | 'alternatives' | 'factId'
+> & {
   timeLimitSec: number;
 };
 export type AnswerResult = {
+  elapsedSec?: number;
   correct: boolean;
   answerIndex: number;
   explanation: string;
@@ -22,10 +28,23 @@ export type AnswerResult = {
   timeFactor: number;
   timedOut: boolean;
 };
-export type GameSession = { sessionId: string; regionCode: string; items: PublicQuestion[] };
+export type GameSession = {
+  sessionId: string;
+  regionCode: string;
+  items: PublicQuestion[];
+  mode?: 'daily' | 'regional';
+  competitive?: boolean;
+  day?: string;
+  answers?: AnswerResult[];
+  completed?: SessionResult;
+};
 export type SessionResult = {
   sessionId: string;
   regionCode: string;
+  mode?: 'daily' | 'regional';
+  competitive?: boolean;
+  day?: string;
+  daily?: { accuracy: number; speed: number; performance: number; support: number };
   totalScore: number;
   maxScore: number;
   correctCount: number;

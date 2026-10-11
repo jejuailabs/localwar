@@ -17,6 +17,7 @@ import {
   Search,
   Swords,
 } from 'lucide-react';
+import type { RegionStanding } from '@/packages/shared/conquest';
 import { PROVINCES, type Province, type Region } from '@/lib/regions';
 type Properties = { shapeISO: string; shapeName: string };
 type CountyProperties = { id: string; name: string; provinceIso: string; lng: number; lat: number };
@@ -24,10 +25,12 @@ export default function BattleMap({
   onRegion,
   discovered,
   territory,
+  standings = [],
 }: {
   onRegion: (r: Region) => void;
   discovered: string[];
   territory: Record<string, number>;
+  standings?: RegionStanding[];
 }) {
   const [data, setData] = useState<FeatureCollection<Geometry, Properties> | null>(null),
     [countyData, setCountyData] = useState<FeatureCollection<Geometry, CountyProperties> | null>(
@@ -475,6 +478,12 @@ export default function BattleMap({
                     {hoverCounty.playable
                       ? `내 점령도 ${territory[hoverCounty.code] || 32}% · 클릭해서 4문제 선택`
                       : '클릭하면 탐험 도감에 기록됩니다.'}
+                  </p>
+                  <p>
+                    오늘의 점령 지수{' '}
+                    {standings.find((s) => s.regionCode === hoverCounty.code)?.total.toFixed(2) ||
+                      '0.00'}{' '}
+                    · 공격 90% + 데일리 10%
                   </p>
                 </div>
                 <button
